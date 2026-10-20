@@ -1,0 +1,22 @@
+Basic Mathematics (MATH-101)
+Course Scope: University syllabus covering Matrices, Differential Calculus, and Linear Algebra.
+
+Unit 1: Matrices and Linear Systems (Weightage: 25%)
+- Matrix rank and echelon form
+- System of linear equations and Gauss elimination
+- Eigenvalues, Eigenvectors, and Cayley-Hamilton Theorem
+
+Unit 2: Differential Calculus (Weightage: 25%)
+- Successive differentiation and Leibnitz theorem
+- Partial differentiation and Euler theorem for homogeneous functions
+- Taylor and Maclaurin series expansions
+
+Unit 3: Integral Calculus (Weightage: 25%)
+- Definite integrals and reduction formulas
+- Beta and Gamma functions
+- Double and triple integrals, area and volume calculation
+
+Unit 4: Ordinary Differential Equations (Weightage: 25%)
+- First order linear differential equations and Bernoulli equations
+- Higher order linear differential equations with constant coefficients
+- Method of variation of parameters

@@ -1,0 +1,6 @@
+{
+  "name": "StudyAI",
+  "description": "Developed by Minshu Kumar. Syllora AI transforms your syllabus into personalized, exam-oriented study material, notes, previous paper analysis, predictions, question papers, and adaptive revision.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

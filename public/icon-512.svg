@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="100" fill="#050508"/>
+  <circle cx="256" cy="256" r="220" fill="none" stroke="#dc2626" stroke-width="8" opacity="0.4"/>
+  <path d="M312 152C291.2 136 264 128 232 128C174.4 128 136 163.2 136 216C136 267.2 169.6 291.2 228.8 305.6L248 310.4C289.6 320 308.8 332.8 308.8 355.2C308.8 380.8 284.8 396.8 248 396.8C212.8 396.8 180.8 384 156.8 361.6L136 395.2C164.8 420.8 204.8 435.2 248 435.2C312 435.2 353.6 400 353.6 347.2C353.6 294.4 318.4 268.8 259.2 254.4L240 249.6C201.6 240 184 228.8 184 208C184 185.6 204.8 169.6 236.8 169.6C265.6 169.6 292.8 179.2 312 195.2L312 152Z" fill="url(#brandGrad)"/>
+  <defs>
+    <linearGradient id="brandGrad" x1="128" y1="128" x2="384" y2="432" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ef4444"/>
+      <stop offset="1" stop-color="#f43f5e"/>
+    </linearGradient>
+  </defs>
+</svg>
