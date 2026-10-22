@@ -83,7 +83,7 @@ export const SubjectMoreMenu: React.FC<SubjectMoreMenuProps> = ({
         aria-label="More options"
         className={
           buttonClassName ||
-          'p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800/70 border border-transparent hover:border-zinc-700/60 transition-all focus:outline-none'
+          'p-1.5 rounded-xl text-[#777589] hover:text-[#28263A] hover:bg-[#EAE5FF]/50 border border-transparent hover:border-[#EEEAF4] transition-all focus:outline-none'
         }
       >
         <MoreVertical className="w-4 h-4" />

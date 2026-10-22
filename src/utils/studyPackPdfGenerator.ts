@@ -182,8 +182,8 @@ export async function generateAndDownloadStudyPackPdf(
     // Brand Label
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(11);
-    doc.setTextColor(248, 113, 113);
-    doc.text('SYLLORA AI  |  HIGH-YIELD EXAM PREPARATION', marginX, 22);
+    doc.setTextColor(21, 158, 154); // Teal brand accent
+    doc.text('SYLLORA AI  |  YOUR AI STUDY COMPANION', marginX, 22);
 
     // Subject Title on Banner
     doc.setFont('helvetica', 'bold');

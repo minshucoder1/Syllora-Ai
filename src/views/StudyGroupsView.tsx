@@ -90,21 +90,21 @@ export const StudyGroupsView: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-2xl glass-panel-heavy border border-red-950/40">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 sm:p-7 rounded-3xl bg-white border border-[#EEEAF4] shadow-sm">
         <div className="space-y-1">
-          <div className="flex items-center gap-2 text-xs font-mono text-red-400">
-            <Users className="w-4 h-4 text-red-500" />
+          <div className="flex items-center gap-2 text-xs font-semibold text-[#7C6EE6]">
+            <Users className="w-4 h-4 text-[#7C6EE6]" />
             <span>COLLABORATIVE STUDY CIRCLES</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white">Study Groups & Partners</h1>
-          <p className="text-xs sm:text-sm text-zinc-400">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#28263A]">Study Groups & Partners</h1>
+          <p className="text-xs sm:text-sm text-[#777589]">
             Private study cohorts with shared syllabi, group discussions, and opt-in peer benchmark leaderboards.
           </p>
         </div>
 
         <button
           onClick={() => setIsCreating(true)}
-          className="btn-red-glow flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold text-white uppercase"
+          className="btn-pastel-primary flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl text-xs font-bold text-white shadow-sm"
         >
           <Plus className="w-4 h-4" />
           <span>Create Group</span>
@@ -113,34 +113,34 @@ export const StudyGroupsView: React.FC = () => {
 
       {/* Creation Modal */}
       {isCreating && (
-        <div className="p-6 rounded-2xl bg-[#0d0d18] border border-red-800/60 space-y-4 animate-fade-in">
-          <h3 className="text-sm font-bold text-white">Create Private Study Circle</h3>
+        <div className="p-6 rounded-3xl bg-white border border-[#EEEAF4] shadow-md space-y-4 animate-fade-in">
+          <h3 className="text-sm font-bold text-[#28263A]">Create Private Study Circle</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <input
               type="text"
               placeholder="Group Name (e.g. CSE 4th Sem Core)"
               value={newGroupName}
               onChange={(e) => setNewGroupName(e.target.value)}
-              className="bg-[#08080f] border border-red-950/60 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-red-500"
+              className="bg-[#FFFDF9] border border-[#EEEAF4] rounded-2xl px-4 py-2.5 text-xs text-[#28263A] focus:outline-none focus:border-[#7C6EE6]"
             />
             <input
               type="text"
               placeholder="Shared Subject (e.g. Data Structures)"
               value={newGroupSubject}
               onChange={(e) => setNewGroupSubject(e.target.value)}
-              className="bg-[#08080f] border border-red-950/60 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-red-500"
+              className="bg-[#FFFDF9] border border-[#EEEAF4] rounded-2xl px-4 py-2.5 text-xs text-[#28263A] focus:outline-none focus:border-[#7C6EE6]"
             />
           </div>
-          <div className="flex justify-end gap-2">
+          <div className="flex justify-end gap-2.5">
             <button
               onClick={() => setIsCreating(false)}
-              className="px-4 py-2 text-xs text-zinc-400 hover:text-white"
+              className="px-4 py-2 rounded-xl text-xs font-semibold text-[#777589] hover:text-[#28263A]"
             >
               Cancel
             </button>
             <button
               onClick={handleCreateGroup}
-              className="btn-red-glow px-4 py-2 rounded-xl text-xs font-bold text-white"
+              className="btn-pastel-primary px-5 py-2 rounded-2xl text-xs font-bold text-white shadow-sm"
             >
               Create Circle
             </button>
@@ -153,39 +153,39 @@ export const StudyGroupsView: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Left: Group Info & Leaderboard */}
           <div className="space-y-4">
-            <div className="p-5 rounded-2xl bg-[#090912] border border-red-950/40 space-y-3">
+            <div className="p-5 rounded-3xl bg-white border border-[#EEEAF4] shadow-sm space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-bold text-red-400 uppercase">
+                <span className="text-xs font-semibold text-[#7C6EE6] px-2.5 py-0.5 rounded-full bg-[#EAE5FF]">
                   {activeGroup.subjectName}
                 </span>
-                <span className="text-xs font-mono text-zinc-400">
-                  Invite Code: <span className="text-white font-bold">{activeGroup.inviteCode}</span>
+                <span className="text-xs text-[#777589]">
+                  Code: <span className="text-[#28263A] font-bold font-mono">{activeGroup.inviteCode}</span>
                 </span>
               </div>
-              <h2 className="text-lg font-bold text-white">{activeGroup.name}</h2>
-              <p className="text-xs text-zinc-400">
+              <h2 className="text-base font-bold text-[#28263A]">{activeGroup.name}</h2>
+              <p className="text-xs text-[#777589]">
                 Privacy protected: Members only share verified accuracy and streak statistics.
               </p>
             </div>
 
             {/* Peer Benchmark Leaderboard */}
-            <div className="p-5 rounded-2xl bg-[#090912] border border-red-950/40 space-y-3">
-              <h3 className="text-xs font-bold text-white font-mono uppercase text-red-400">
+            <div className="p-5 rounded-3xl bg-white border border-[#EEEAF4] shadow-sm space-y-3">
+              <h3 className="text-xs font-bold text-[#28263A] font-mono uppercase">
                 Group Leaderboard
               </h3>
               <div className="space-y-2">
                 {(activeGroup.members || []).map((m: any, idx: number) => (
                   <div
                     key={idx}
-                    className="p-3 rounded-xl bg-[#0f0f18] border border-zinc-900 flex items-center justify-between text-xs"
+                    className="p-3 rounded-2xl bg-[#FFFDF9] border border-[#EEEAF4] flex items-center justify-between text-xs"
                   >
                     <div className="flex items-center gap-2">
-                      <span className="font-mono font-bold text-zinc-500">#{idx + 1}</span>
-                      <span className="font-bold text-zinc-200">{m.userName}</span>
+                      <span className="font-mono font-bold text-[#777589]">#{idx + 1}</span>
+                      <span className="font-bold text-[#28263A]">{m.userName}</span>
                     </div>
-                    <div className="flex items-center gap-3 font-mono">
-                      <span className="text-zinc-400">{m.topicsCount} Topics</span>
-                      <span className="text-emerald-400 font-bold">{m.quizAccuracy}% Acc</span>
+                    <div className="flex items-center gap-3 font-medium">
+                      <span className="text-[#777589]">{m.topicsCount} Topics</span>
+                      <span className="text-[#319B78] font-bold">{m.quizAccuracy}% Acc</span>
                     </div>
                   </div>
                 ))}
@@ -194,38 +194,38 @@ export const StudyGroupsView: React.FC = () => {
           </div>
 
           {/* Right: Group Discussion Feed (2 cols) */}
-          <div className="lg:col-span-2 rounded-2xl bg-[#08080e] border border-red-950/40 p-5 flex flex-col justify-between min-h-[450px]">
+          <div className="lg:col-span-2 rounded-3xl bg-white border border-[#EEEAF4] shadow-sm p-6 flex flex-col justify-between min-h-[450px]">
             <div className="space-y-3 overflow-y-auto max-h-[360px] pr-2">
-              <div className="text-xs font-mono text-zinc-500 uppercase pb-2 border-b border-zinc-900">
+              <div className="text-xs font-semibold text-[#777589] uppercase pb-2 border-b border-[#EEEAF4]">
                 Group Discussion & Shared Doubts
               </div>
 
               {(activeGroup.discussions || []).map((disc: any) => (
-                <div key={disc.id} className="p-3 rounded-xl bg-[#0f0f18] border border-zinc-900 space-y-1">
-                  <div className="flex items-center justify-between text-[11px]">
-                    <span className="font-bold text-red-400">{disc.userName}</span>
-                    <span className="text-zinc-500 font-mono">
+                <div key={disc.id} className="p-3.5 rounded-2xl bg-[#FFFDF9] border border-[#EEEAF4] space-y-1">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-bold text-[#7C6EE6]">{disc.userName}</span>
+                    <span className="text-[#777589] text-[11px]">
                       {new Date(disc.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </span>
                   </div>
-                  <p className="text-xs text-zinc-200 leading-relaxed">{disc.message}</p>
+                  <p className="text-xs sm:text-sm text-[#28263A] leading-relaxed">{disc.message}</p>
                 </div>
               ))}
             </div>
 
             {/* Input field */}
-            <div className="pt-4 flex items-center gap-2 border-t border-zinc-900">
+            <div className="pt-4 flex items-center gap-2 border-t border-[#EEEAF4]">
               <input
                 type="text"
                 placeholder="Share a doubt, note link, or study question..."
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                className="flex-1 bg-[#0b0b14] border border-red-950/60 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-red-500"
+                className="flex-1 bg-[#FFFDF9] border border-[#EEEAF4] rounded-2xl px-4 py-2.5 text-xs text-[#28263A] focus:outline-none focus:border-[#7C6EE6]"
               />
               <button
                 onClick={handleSendMessage}
-                className="btn-red-glow p-2.5 rounded-xl text-white"
+                className="btn-pastel-primary p-2.5 rounded-2xl text-white shadow-sm"
               >
                 <Send className="w-4 h-4" />
               </button>

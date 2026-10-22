@@ -476,8 +476,8 @@ export const AddSyllabusView: React.FC = () => {
                       <FileText className="w-5 h-5" />
                     </div>
                     <div>
-                      <div className="text-sm font-semibold text-white">{uploadedFile.name}</div>
-                      <div className="text-xs text-zinc-400 font-mono">
+                      <div className="text-sm font-semibold text-[#28263A]">{uploadedFile.name}</div>
+                      <div className="text-xs text-[#777589] font-mono">
                         {(uploadedFile.size / 1024).toFixed(1)} KB • {uploadedFile.name.split('.').pop()?.toUpperCase()}
                       </div>
                     </div>
@@ -488,7 +488,7 @@ export const AddSyllabusView: React.FC = () => {
                       if (fileInputRef.current) fileInputRef.current.value = '';
                     }}
                     disabled={isAnalyzing}
-                    className="p-2 text-zinc-400 hover:text-red-400 hover:bg-red-950/30 rounded-lg transition-colors"
+                    className="p-2 text-[#777589] hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-colors"
                     title="Remove file"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -501,7 +501,7 @@ export const AddSyllabusView: React.FC = () => {
           {/* Option A: Enter Syllabus Text */}
           {inputMode === 'text' && (
             <div className="space-y-3">
-              <label className="block text-xs font-semibold text-zinc-300">
+              <label className="block text-xs font-semibold text-[#28263A]">
                 Paste syllabus modules, chapters, or topic list:
               </label>
               <textarea
@@ -520,26 +520,26 @@ Differential Calculus
 Successive differentiation, Leibnitz theorem
 Partial derivatives and Euler theorem`}
                 rows={9}
-                className="w-full px-4 py-3 rounded-xl bg-[#0a0a12] border border-red-950/60 focus:border-red-500 focus:ring-1 focus:ring-red-500 text-zinc-200 placeholder-zinc-600 text-xs font-mono transition-all resize-y"
+                className="w-full px-4 py-3 rounded-2xl bg-[#FFFDF9] border border-[#EEEAF4] focus:border-[#7C6EE6] focus:outline-none focus:ring-2 focus:ring-[#EAE5FF] text-[#28263A] placeholder-[#777589]/60 text-xs font-mono transition-all resize-y shadow-inner"
               />
             </div>
           )}
 
           {/* Error Message Card with Clean Redesign & Retries */}
           {analysisError && (
-            <div className="p-4 rounded-xl bg-red-950/30 border border-red-600/40 space-y-3 animate-fade-in">
+            <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 space-y-3 animate-fade-in">
               <div className="flex items-start gap-3">
-                <ShieldAlert className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+                <ShieldAlert className="w-5 h-5 text-rose-500 flex-shrink-0 mt-0.5" />
                 <div className="space-y-1">
-                  <h4 className="text-sm font-bold text-red-200">{analysisError.title}</h4>
-                  <p className="text-xs text-zinc-300 leading-relaxed">{analysisError.subtext}</p>
+                  <h4 className="text-sm font-bold text-rose-800">{analysisError.title}</h4>
+                  <p className="text-xs text-rose-700 leading-relaxed">{analysisError.subtext}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 pt-2">
                 <button
                   onClick={handleTryBackup}
                   disabled={isAnalyzing || isTryingBackup}
-                  className="btn-red-glow flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold text-white shadow-md transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="btn-pastel-primary flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-white shadow-sm transition-all disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   <RefreshCw className={`w-3.5 h-3.5 ${isTryingBackup ? 'animate-spin' : ''}`} />
                   <span>{isTryingBackup ? 'Trying backup model...' : 'Try Again With Backup AI'}</span>
@@ -549,7 +549,7 @@ Partial derivatives and Euler theorem`}
                     setInputMode(inputMode === 'file' ? 'text' : 'file');
                     setAnalysisError(null);
                   }}
-                  className="px-3 py-2 rounded-lg text-xs font-medium text-zinc-400 hover:text-white bg-zinc-900 border border-zinc-800 transition-colors"
+                  className="px-3 py-2 rounded-xl text-xs font-semibold text-[#777589] hover:text-[#28263A] bg-white border border-[#EEEAF4] hover:bg-[#FFFDF9] transition-colors"
                 >
                   Choose Another Method
                 </button>
@@ -559,19 +559,19 @@ Partial derivatives and Euler theorem`}
 
           {/* Analysis Active Non-Blocking Progress */}
           {isAnalyzing && (
-            <div className="p-5 rounded-xl bg-[#090912] border border-red-900/50 space-y-3">
+            <div className="p-5 rounded-2xl bg-[#FFFDF9] border border-[#D9D2F8] space-y-3">
               <div className="flex items-center justify-between text-xs">
-                <div className="flex items-center gap-2 text-red-400 font-semibold">
-                  <RefreshCw className="w-4 h-4 animate-spin text-red-500" />
+                <div className="flex items-center gap-2 text-[#7C6EE6] font-semibold">
+                  <RefreshCw className="w-4 h-4 animate-spin text-[#7C6EE6]" />
                   <span>{analysisStage || 'Analyzing your syllabus...'}</span>
                 </div>
-                <span className="text-[10px] font-mono text-zinc-500">Dual-Model Cascade Active</span>
+                <span className="text-[10px] font-mono text-[#777589]">Pastel Bloom Engine Active</span>
               </div>
-              <div className="w-full h-1.5 bg-zinc-900 rounded-full overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-red-600 via-rose-500 to-red-400 animate-[pulse_1.5s_infinite] w-3/4 rounded-full" />
+              <div className="w-full h-2 bg-[#F3F0F8] rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-[#7C6EE6] via-[#A99EFA] to-[#CFF5E7] animate-[pulse_1.5s_infinite] w-3/4 rounded-full" />
               </div>
-              <p className="text-[11px] text-zinc-400">
-                StudyAI is reading your document and mapping out units, topics, and priority weightages.
+              <p className="text-[11px] text-[#777589]">
+                Syllora AI is reading your document and mapping out units, topics, and priority weightages.
                 If primary AI is busy, we automatically switch to our fast backup model.
               </p>
             </div>
@@ -582,7 +582,7 @@ Partial derivatives and Euler theorem`}
             <button
               onClick={handleAnalyzeSyllabus}
               disabled={isAnalyzing}
-              className={`btn-red-glow flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold text-white tracking-wide uppercase transition-all ${
+              className={`btn-pastel-primary flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-bold text-white tracking-wide uppercase transition-all shadow-sm ${
                 isAnalyzing ? 'opacity-60 cursor-not-allowed' : ''
               }`}
             >
@@ -604,53 +604,53 @@ Partial derivatives and Euler theorem`}
         /* STEP 2: Syllabus Detected Review & Generation Settings */
         <div className="space-y-6 animate-fade-in">
           {fallbackNotice && (
-            <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-950/40 border border-emerald-600/40 text-emerald-400 text-xs">
-              <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+            <div className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-[#CFF5E7] border border-[#A9E8D2] text-[#319B78] text-xs font-semibold">
+              <CheckCircle2 className="w-4 h-4 text-[#319B78]" />
               <span>{fallbackNotice}</span>
             </div>
           )}
 
           {/* Subject Overview Card */}
-          <div className="glass-panel-heavy rounded-2xl p-6 border border-red-950/40 space-y-4">
+          <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#EEEAF4] shadow-[0_4px_20px_rgba(40,38,58,0.04)] space-y-4">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 text-xs font-semibold text-red-500 uppercase tracking-wider font-mono">
+              <div className="flex items-center gap-2 text-xs font-semibold text-[#7C6EE6] uppercase tracking-wider font-mono">
                 <BookOpen className="w-4 h-4" />
                 <span>Syllabus Detected</span>
               </div>
               <button
                 onClick={() => setDetectedSyllabus(null)}
-                className="text-xs text-zinc-400 hover:text-white transition-colors"
+                className="text-xs font-semibold text-[#777589] hover:text-[#7C6EE6] transition-colors"
               >
                 ← Back to Upload
               </button>
             </div>
 
             <div className="space-y-2">
-              <label className="text-xs text-zinc-400">Subject Name:</label>
+              <label className="text-xs font-semibold text-[#777589]">Subject Name:</label>
               <input
                 type="text"
                 value={detectedSyllabus.subjectName}
                 onChange={(e) => handleUpdateSubjectName(e.target.value)}
-                className="w-full text-xl font-bold text-white bg-[#0c0c14] border border-red-950 px-3 py-2 rounded-xl focus:border-red-500 focus:outline-none"
+                className="w-full text-xl sm:text-2xl font-bold text-[#28263A] bg-[#FFFDF9] border border-[#EEEAF4] px-4 py-2.5 rounded-2xl focus:border-[#7C6EE6] focus:outline-none focus:ring-2 focus:ring-[#EAE5FF]"
               />
-              <p className="text-xs text-zinc-400">{detectedSyllabus.description}</p>
+              <p className="text-xs sm:text-sm text-[#777589]">{detectedSyllabus.description}</p>
             </div>
           </div>
 
           {/* Units and Topics Interactive Review */}
           <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <h3 className="text-base font-bold text-white flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <h3 className="text-base font-bold text-[#28263A] flex items-center gap-2 flex-wrap">
                 <span>Units & Modules ({detectedSyllabus.units.length})</span>
-                <span className="text-xs font-normal text-zinc-400">
+                <span className="text-xs font-normal text-[#777589]">
                   (Click any priority pill to cycle priority: 🔥 Very Important, ⭐ Important, 🟡 Moderate, ⚪ Low)
                 </span>
               </h3>
               <button
                 onClick={handleAddUnit}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-200"
+                className="self-start sm:self-auto flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-[#EAE5FF] hover:bg-[#ded7ff] text-[#7C6EE6] border border-[#D9D2F8] shadow-sm transition-all"
               >
-                <Plus className="w-3.5 h-3.5 text-red-500" /> Add Unit
+                <Plus className="w-3.5 h-3.5" /> Add Unit
               </button>
             </div>
 
@@ -658,11 +658,11 @@ Partial derivatives and Euler theorem`}
               {detectedSyllabus.units.map((unit, uIdx) => (
                 <div
                   key={uIdx}
-                  className="rounded-2xl p-5 bg-[#0a0a12] border border-red-950/40 space-y-4 hover:border-red-600/30 transition-all"
+                  className="rounded-3xl p-5 sm:p-6 bg-white border border-[#EEEAF4] shadow-[0_4px_20px_rgba(40,38,58,0.03)] space-y-4 hover:border-[#D9D2F8] transition-all"
                 >
-                  <div className="flex items-center justify-between border-b border-zinc-900 pb-3">
-                    <div className="flex items-center gap-3">
-                      <span className="w-6 h-6 rounded-lg bg-red-950 text-red-400 font-mono text-xs flex items-center justify-center font-bold">
+                  <div className="flex items-center justify-between border-b border-[#EEEAF4] pb-3">
+                    <div className="flex items-center gap-3 flex-1">
+                      <span className="w-7 h-7 rounded-xl bg-[#EAE5FF] text-[#7C6EE6] font-mono text-xs flex items-center justify-center font-bold">
                         {uIdx + 1}
                       </span>
                       <input
@@ -673,16 +673,16 @@ Partial derivatives and Euler theorem`}
                           updated[uIdx].name = e.target.value;
                           setDetectedSyllabus({ ...detectedSyllabus, units: updated });
                         }}
-                        className="font-bold text-sm text-zinc-100 bg-transparent border-b border-transparent hover:border-zinc-700 focus:border-red-500 focus:outline-none px-1"
+                        className="font-bold text-sm sm:text-base text-[#28263A] bg-transparent border-b border-transparent hover:border-[#EEEAF4] focus:border-[#7C6EE6] focus:outline-none px-1 flex-1"
                       />
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs text-zinc-400 font-mono">
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-xs font-semibold text-[#777589] font-mono">
                         Weightage: {unit.weightage}%
                       </span>
                       <button
                         onClick={() => handleDeleteUnit(uIdx)}
-                        className="p-1 text-zinc-500 hover:text-red-400 transition-colors"
+                        className="p-1.5 text-[#777589] hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
                         title="Delete Unit"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -695,10 +695,10 @@ Partial derivatives and Euler theorem`}
                     {unit.topics.map((topic, tIdx) => (
                       <div
                         key={tIdx}
-                        className="flex items-center justify-between p-2.5 rounded-xl bg-[#0f0f18] border border-zinc-900 hover:border-zinc-800 group"
+                        className="flex items-center justify-between p-3 rounded-2xl bg-[#FFFDF9] border border-[#EEEAF4] hover:border-[#D9D2F8] transition-all group"
                       >
                         <div className="flex items-center gap-3 flex-1">
-                          <span className="text-xs text-zinc-500 font-mono">
+                          <span className="text-xs text-[#777589] font-mono">
                             {uIdx + 1}.{tIdx + 1}
                           </span>
                           <input
@@ -709,7 +709,7 @@ Partial derivatives and Euler theorem`}
                               updated[uIdx].topics[tIdx].name = e.target.value;
                               setDetectedSyllabus({ ...detectedSyllabus, units: updated });
                             }}
-                            className="text-xs text-zinc-200 bg-transparent focus:outline-none flex-1 font-medium"
+                            className="text-xs sm:text-sm text-[#28263A] bg-transparent focus:outline-none flex-1 font-medium"
                           />
                         </div>
 
@@ -718,14 +718,14 @@ Partial derivatives and Euler theorem`}
                           <button
                             onClick={() => handleTogglePriority(uIdx, tIdx)}
                             title={`Rationale: ${topic.priorityReason}`}
-                            className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase transition-all flex items-center gap-1 ${
+                            className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase transition-all flex items-center gap-1 ${
                               topic.priority === 'very_important'
-                                ? 'bg-red-950 text-red-400 border border-red-700'
+                                ? 'bg-[#FFE0D2] text-[#E5A044] border border-[#FFCBB3]'
                                 : topic.priority === 'important'
-                                ? 'bg-amber-950 text-amber-300 border border-amber-700'
+                                ? 'bg-[#FFF0B8] text-amber-800 border border-[#FFE58A]'
                                 : topic.priority === 'moderate'
-                                ? 'bg-yellow-950 text-yellow-300 border border-yellow-800'
-                                : 'bg-zinc-800 text-zinc-400 border border-zinc-700'
+                                ? 'bg-[#EAE5FF] text-[#7C6EE6] border border-[#D9D2F8]'
+                                : 'bg-[#FFFDF9] text-[#777589] border border-[#EEEAF4]'
                             }`}
                           >
                             {topic.priority === 'very_important' && '🔥 Very Important'}
@@ -736,7 +736,7 @@ Partial derivatives and Euler theorem`}
 
                           <button
                             onClick={() => handleDeleteTopic(uIdx, tIdx)}
-                            className="p-1 text-zinc-600 hover:text-red-400 transition-colors"
+                            className="p-1 text-[#777589] hover:text-rose-600 rounded-lg transition-colors"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
@@ -747,7 +747,7 @@ Partial derivatives and Euler theorem`}
 
                   <button
                     onClick={() => handleAddTopic(uIdx)}
-                    className="flex items-center gap-1.5 text-xs text-red-400 hover:text-red-300 pt-1"
+                    className="flex items-center gap-1.5 text-xs font-semibold text-[#7C6EE6] hover:text-[#6A5AD6] pt-1"
                   >
                     <Plus className="w-3.5 h-3.5" /> Add Topic to Unit {uIdx + 1}
                   </button>
@@ -757,9 +757,9 @@ Partial derivatives and Euler theorem`}
           </div>
 
           {/* Generation Settings Checklist */}
-          <div className="glass-panel-heavy rounded-2xl p-6 border border-red-950/40 space-y-4">
-            <h3 className="text-base font-bold text-white flex items-center gap-2">
-              <Layers className="w-4 h-4 text-red-500" />
+          <div className="p-6 rounded-3xl bg-white border border-[#EEEAF4] shadow-sm space-y-4">
+            <h3 className="text-base font-bold text-[#28263A] flex items-center gap-2">
+              <Layers className="w-4 h-4 text-[#7C6EE6]" />
               <span>Select Study Material to Generate</span>
             </h3>
 
@@ -790,15 +790,15 @@ Partial derivatives and Euler theorem`}
                         setSelectedGenerators([...selectedGenerators, item]);
                       }
                     }}
-                    className={`flex items-center gap-2.5 p-2.5 rounded-xl text-xs font-medium text-left border transition-all ${
+                    className={`flex items-center gap-2.5 p-3 rounded-2xl text-xs font-medium text-left border transition-all ${
                       checked
-                        ? 'bg-red-950/40 border-red-600/50 text-white shadow-[0_0_10px_rgba(220,38,38,0.15)]'
-                        : 'bg-[#0b0b12] border-zinc-900 text-zinc-400 hover:text-zinc-200'
+                        ? 'bg-[#EAE5FF]/70 border-[#D9D2F8] text-[#7C6EE6] font-bold shadow-sm'
+                        : 'bg-[#FFFDF9] border-[#EEEAF4] text-[#777589] hover:text-[#28263A]'
                     }`}
                   >
                     <div
-                      className={`w-4 h-4 rounded border flex items-center justify-center flex-shrink-0 ${
-                        checked ? 'bg-red-600 border-red-500 text-white' : 'border-zinc-700'
+                      className={`w-4 h-4 rounded-md border flex items-center justify-center flex-shrink-0 ${
+                        checked ? 'bg-[#7C6EE6] border-[#7C6EE6] text-white' : 'border-[#EEEAF4] bg-white'
                       }`}
                     >
                       {checked && <CheckCircle2 className="w-3.5 h-3.5" />}
@@ -811,18 +811,18 @@ Partial derivatives and Euler theorem`}
           </div>
 
           {/* Exam Configuration */}
-          <div className="glass-panel-heavy rounded-2xl p-6 border border-red-950/40 space-y-4">
-            <h3 className="text-base font-bold text-white flex items-center gap-2">
-              <Settings className="w-4 h-4 text-red-500" />
+          <div className="p-6 rounded-3xl bg-white border border-[#EEEAF4] shadow-sm space-y-4">
+            <h3 className="text-base font-bold text-[#28263A] flex items-center gap-2">
+              <Settings className="w-4 h-4 text-[#7C6EE6]" />
               <span>Exam Preferences</span>
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
               <div>
-                <label className="text-[11px] text-zinc-400 block mb-1">Target Exam Type:</label>
+                <label className="text-[11px] font-semibold text-[#777589] block mb-1">Target Exam Type:</label>
                 <select
                   value={examSettings.examType}
                   onChange={(e) => setExamSettings({ ...examSettings, examType: e.target.value })}
-                  className="w-full bg-[#0a0a12] border border-red-950/60 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500"
+                  className="w-full bg-[#FFFDF9] border border-[#EEEAF4] rounded-xl px-3 py-2 text-xs font-semibold text-[#28263A] focus:outline-none focus:border-[#7C6EE6]"
                 >
                   <option>University Exam</option>
                   <option>Semester Exam</option>
@@ -833,11 +833,11 @@ Partial derivatives and Euler theorem`}
               </div>
 
               <div>
-                <label className="text-[11px] text-zinc-400 block mb-1">Difficulty Level:</label>
+                <label className="text-[11px] font-semibold text-[#777589] block mb-1">Difficulty Level:</label>
                 <select
                   value={examSettings.difficulty}
                   onChange={(e) => setExamSettings({ ...examSettings, difficulty: e.target.value })}
-                  className="w-full bg-[#0a0a12] border border-red-950/60 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500"
+                  className="w-full bg-[#FFFDF9] border border-[#EEEAF4] rounded-xl px-3 py-2 text-xs font-semibold text-[#28263A] focus:outline-none focus:border-[#7C6EE6]"
                 >
                   <option>Easy</option>
                   <option>Medium</option>
@@ -847,11 +847,11 @@ Partial derivatives and Euler theorem`}
               </div>
 
               <div>
-                <label className="text-[11px] text-zinc-400 block mb-1">Preferred Language:</label>
+                <label className="text-[11px] font-semibold text-[#777589] block mb-1">Preferred Language:</label>
                 <select
                   value={examSettings.language}
                   onChange={(e) => setExamSettings({ ...examSettings, language: e.target.value })}
-                  className="w-full bg-[#0a0a12] border border-red-950/60 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500"
+                  className="w-full bg-[#FFFDF9] border border-[#EEEAF4] rounded-xl px-3 py-2 text-xs font-semibold text-[#28263A] focus:outline-none focus:border-[#7C6EE6]"
                 >
                   <option>English</option>
                   <option>Hindi</option>
@@ -860,11 +860,11 @@ Partial derivatives and Euler theorem`}
               </div>
 
               <div>
-                <label className="text-[11px] text-zinc-400 block mb-1">Notes Depth:</label>
+                <label className="text-[11px] font-semibold text-[#777589] block mb-1">Notes Depth:</label>
                 <select
                   value={examSettings.notesLength}
                   onChange={(e) => setExamSettings({ ...examSettings, notesLength: e.target.value })}
-                  className="w-full bg-[#0a0a12] border border-red-950/60 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500"
+                  className="w-full bg-[#FFFDF9] border border-[#EEEAF4] rounded-xl px-3 py-2 text-xs font-semibold text-[#28263A] focus:outline-none focus:border-[#7C6EE6]"
                 >
                   <option>Detailed</option>
                   <option>Medium</option>
@@ -878,13 +878,13 @@ Partial derivatives and Euler theorem`}
           <div className="flex items-center justify-between pt-4">
             <button
               onClick={() => setDetectedSyllabus(null)}
-              className="px-4 py-2.5 rounded-xl text-xs font-semibold text-zinc-400 hover:text-white"
+              className="px-4 py-2.5 rounded-xl text-xs font-semibold text-[#777589] hover:text-[#28263A]"
             >
               Cancel
             </button>
             <button
               onClick={handleConfirmAndSave}
-              className="btn-red-glow flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold text-white uppercase tracking-wider"
+              className="btn-pastel-primary flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-bold text-white uppercase tracking-wider shadow-sm"
             >
               <span>Confirm Syllabus & Generate Study Material</span>
               <ArrowRight className="w-4 h-4" />

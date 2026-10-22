@@ -1,15 +1,27 @@
 {
   "id": "/",
-  "name": "Syllora AI — Exam Prep & Study System",
+  "name": "Syllora AI — Your AI Study Companion",
   "short_name": "Syllora AI",
-  "description": "AI-powered exam preparation, notes, questions, numericals, offline study mode and handwritten solver.",
+  "description": "Syllora AI transforms your syllabus into personalized, exam-oriented study material, notes, previous paper analysis, predictions, and question papers. Developed by Minshu Kumar.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "theme_color": "#050508",
-  "background_color": "#050508",
+  "theme_color": "#FFF9F2",
+  "background_color": "#FFF9F2",
   "orientation": "portrait-primary",
   "icons": [
+    {
+      "src": "/syllora-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/syllora-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "/icon-192.svg",
       "sizes": "192x192",

@@ -158,12 +158,21 @@ export const RegisterView: React.FC = () => {
         <div className="rounded-3xl bg-white border border-[#EEEAF4] p-6 sm:p-10 shadow-[0_10px_35px_rgba(40,38,58,0.05)]">
           
           {/* Header */}
-          <div className="text-center space-y-2 mb-8">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EAE5FF] border border-[#D9D2F8] text-[#7C6EE6] text-xs font-semibold shadow-xs">
-              <Sparkles className="w-3.5 h-3.5 text-[#7C6EE6]" />
+          <div className="text-center space-y-3 mb-8">
+            <div className="flex justify-center">
+              <div className="w-16 h-16 rounded-full bg-white p-1 shadow-[0_4px_16px_rgba(24,47,83,0.12)] border border-[#EEEAF4]">
+                <img
+                  src="/syllora-logo.png"
+                  alt="SYLLORA AI Logo"
+                  className="w-full h-full object-contain rounded-full"
+                />
+              </div>
+            </div>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EAE5FF] border border-[#D9D2F8] text-[#182F53] text-xs font-semibold shadow-xs">
+              <span className="text-[#D9A441]">✦</span>
               <span>PASTEL BLOOM • DIRECT INSTANT ACTIVATION</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#28263A] tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#182F53] tracking-tight">
               Create Your Syllora AI Account
             </h1>
             <p className="text-xs sm:text-sm text-[#777589] max-w-md mx-auto">

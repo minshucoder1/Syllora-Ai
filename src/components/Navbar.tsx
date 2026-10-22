@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
+import { SylloraLogo } from './SylloraLogo';
 import {
   Sparkles,
   Flame,
@@ -36,16 +37,27 @@ export const Navbar: React.FC = () => {
             <button
               onClick={() => setActiveTab(user ? 'dashboard' : 'landing')}
               className="flex items-center gap-2.5 text-left group focus:outline-none"
+              aria-label="SYLLORA AI Home"
             >
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#7C6EE6] to-[#6A5AD6] flex items-center justify-center shadow-[0_4px_12px_rgba(124,110,230,0.25)] group-hover:scale-105 transition-all duration-300">
-                <Sparkles className="w-5 h-5 text-white" />
+              {/* Desktop view */}
+              <div className="hidden sm:flex items-center gap-2.5">
+                <SylloraLogo size={40} priority />
+                <div>
+                  <span className="text-xl font-extrabold tracking-tight text-[#182F53] flex items-center gap-1 leading-tight">
+                    SYLLORA<span className="text-[#159E9A]">AI</span>
+                    <span className="text-[#D9A441] text-xs -mt-1">✦</span>
+                  </span>
+                  <span className="block text-[10px] text-[#777589] font-medium tracking-wide -mt-0.5">
+                    Your AI Study Companion • By Minshu Kumar
+                  </span>
+                </div>
               </div>
-              <div>
-                <span className="text-xl font-extrabold tracking-tight text-[#28263A] flex items-center gap-1">
-                  SYLLORA<span className="text-[#7C6EE6]">AI</span>
-                </span>
-                <span className="hidden sm:block text-[10px] text-[#777589] font-medium tracking-wide -mt-1">
-                  Pastel Bloom • By Minshu Kumar
+
+              {/* Mobile view (compact layout) */}
+              <div className="flex sm:hidden items-center gap-2">
+                <SylloraLogo size={32} priority />
+                <span className="text-base font-extrabold tracking-tight text-[#182F53] flex items-center leading-none">
+                  SYLLORA<span className="text-[#159E9A] ml-0.5">AI</span>
                 </span>
               </div>
             </button>

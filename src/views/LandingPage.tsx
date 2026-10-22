@@ -138,17 +138,28 @@ export const LandingPage: React.FC = () => {
   ];
 
   return (
-    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 space-y-24">
+    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-24">
       {/* 1. HERO SECTION */}
-      <div className="text-center space-y-7 max-w-4xl mx-auto">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#EAE5FF] border border-[#D9D2F8] text-[#7C6EE6] text-xs font-semibold tracking-wide shadow-sm">
-          <Sparkles className="w-3.5 h-3.5 text-[#7C6EE6]" />
-          <span>DEVELOPED BY MINSHU KUMAR • PASTEL BLOOM EDITION</span>
+      <div className="text-center space-y-6 max-w-4xl mx-auto">
+        {/* Brand Logo Emblem */}
+        <div className="flex justify-center">
+          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white p-1.5 shadow-[0_10px_35px_rgba(24,47,83,0.14)] border-2 border-[#D9D2F8] hover:scale-105 transition-all duration-300">
+            <img
+              src="/syllora-logo.png"
+              alt="SYLLORA AI — Your AI Study Companion"
+              className="w-full h-full object-contain rounded-full"
+            />
+          </div>
         </div>
 
-        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-[#28263A] tracking-tight leading-[1.12]">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#EAE5FF] border border-[#D9D2F8] text-[#182F53] text-xs font-semibold tracking-wide shadow-sm">
+          <span className="text-[#D9A441]">✦</span>
+          <span>OFFICIAL SYLLORA AI • DEVELOPED BY MINSHU KUMAR</span>
+        </div>
+
+        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-[#182F53] tracking-tight leading-[1.12]">
           Turn Your Syllabus Into <br />
-          <span className="text-[#7C6EE6]">Complete Study Material ✨</span>
+          <span className="text-[#159E9A]">Complete Study Material ✨</span>
         </h1>
 
         <p className="text-base sm:text-lg text-[#777589] max-w-2xl mx-auto leading-relaxed">

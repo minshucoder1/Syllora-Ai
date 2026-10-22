@@ -175,38 +175,38 @@ export const MySubjectsView: React.FC = () => {
           {[1, 2, 3].map((n) => (
             <div
               key={n}
-              className="p-5 rounded-2xl bg-[#0a0a14] border border-red-950/30 space-y-4 animate-pulse"
+              className="p-6 rounded-3xl bg-white border border-[#EEEAF4] shadow-sm space-y-4 animate-pulse"
             >
               <div className="flex items-center justify-between">
-                <div className="w-16 h-5 bg-zinc-800/80 rounded" />
-                <div className="w-6 h-6 bg-zinc-800/80 rounded" />
+                <div className="w-20 h-6 bg-[#EAE5FF]/60 rounded-full" />
+                <div className="w-7 h-7 bg-[#EEEAF4] rounded-full" />
               </div>
-              <div className="w-3/4 h-5 bg-zinc-800/80 rounded" />
-              <div className="w-full h-10 bg-zinc-800/50 rounded" />
-              <div className="w-full h-8 bg-zinc-800/70 rounded-xl" />
+              <div className="w-3/4 h-6 bg-[#EEEAF4] rounded-lg" />
+              <div className="w-full h-10 bg-[#FFFDF9] border border-[#EEEAF4] rounded-xl" />
+              <div className="w-full h-9 bg-[#EAE5FF]/40 rounded-xl" />
             </div>
           ))}
         </div>
       ) : displayedList.length === 0 ? (
         /* Empty State */
-        <div className="p-12 rounded-2xl bg-[#090910] border border-red-950/40 text-center space-y-4 max-w-lg mx-auto">
-          <div className="w-14 h-14 rounded-2xl bg-red-950/50 border border-red-800/40 flex items-center justify-center mx-auto text-red-400">
+        <div className="p-12 rounded-3xl bg-white border border-[#EEEAF4] shadow-sm text-center space-y-4 max-w-lg mx-auto">
+          <div className="w-16 h-16 rounded-2xl bg-[#EAE5FF] border border-[#D9D2F8] flex items-center justify-center mx-auto text-[#7C6EE6]">
             {activeFilter === 'active' ? (
-              <BookOpen className="w-7 h-7" />
+              <BookOpen className="w-8 h-8" />
             ) : (
-              <Archive className="w-7 h-7" />
+              <Archive className="w-8 h-8" />
             )}
           </div>
 
           <div className="space-y-1.5">
-            <h3 className="text-lg font-bold text-white">
+            <h3 className="text-xl font-bold text-[#28263A]">
               {searchQuery
                 ? `No subjects match "${searchQuery}"`
                 : activeFilter === 'active'
                 ? 'No active subjects yet'
                 : 'No archived subjects'}
             </h3>
-            <p className="text-xs text-zinc-400 max-w-sm mx-auto leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#777589] max-w-sm mx-auto leading-relaxed">
               {searchQuery
                 ? 'Try a different search term or add a new syllabus.'
                 : activeFilter === 'active'
@@ -215,26 +215,26 @@ export const MySubjectsView: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex items-center justify-center gap-3 pt-2">
+          <div className="flex items-center justify-center gap-3 pt-3 flex-wrap">
             <button
               onClick={() => openSyllabusFlow()}
-              className="btn-red-glow px-4 py-2 rounded-xl text-xs font-semibold text-white flex items-center gap-1.5"
+              className="btn-pastel-primary px-5 py-2.5 rounded-2xl text-xs font-bold text-white flex items-center gap-2 shadow-sm"
             >
-              <PlusCircle className="w-3.5 h-3.5" />
+              <PlusCircle className="w-4 h-4" />
               <span>Add Syllabus</span>
             </button>
             <button
               onClick={() => setIsGlobalSearchOpen(true)}
-              className="px-4 py-2 rounded-xl text-xs font-semibold bg-[#141422] hover:bg-zinc-800 border border-zinc-800 text-zinc-200 transition-all flex items-center gap-1.5"
+              className="px-4 py-2.5 rounded-2xl text-xs font-semibold bg-[#FFFDF9] hover:bg-[#EAE5FF]/40 border border-[#EEEAF4] text-[#28263A] transition-all flex items-center gap-2"
             >
-              <Sparkles className="w-3.5 h-3.5 text-red-500" />
+              <Sparkles className="w-4 h-4 text-[#7C6EE6]" />
               <span>Learn Any Topic</span>
             </button>
           </div>
         </div>
       ) : (
-        /* Populated Subjects Grid */
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        /* Populated Subjects Grid - Pastel Bloom Layout */
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayedList.map((subj) => {
             const allTopics = subj.units.flatMap((u) => u.topics);
             const completedCount = allTopics.filter((t) => t.completed).length;
@@ -251,66 +251,80 @@ export const MySubjectsView: React.FC = () => {
                   month: 'short',
                   day: 'numeric',
                 })
-              : 'Saved';
+              : 'Recently Added';
+
+            // Safe fallback logic for subject name
+            const subjectTitle =
+              (subj.name && subj.name.trim()) ||
+              (subj as any).title ||
+              (subj as any).subjectName ||
+              (subj.syllabusFileName ? subj.syllabusFileName.replace(/\.[^/.]+$/, '') : '') ||
+              subj.code ||
+              'Untitled Subject';
 
             return (
               <div
                 key={subj.id}
-                className="p-5 rounded-2xl bg-[#0a0a14] border border-red-950/40 card-hover-glow space-y-4 relative flex flex-col justify-between text-left"
+                className="p-6 rounded-3xl bg-white border border-[#EEEAF4] hover:border-[#D9D2F8] shadow-[0_4px_20px_rgba(40,38,58,0.04)] hover:shadow-[0_8px_30px_rgba(40,38,58,0.08)] transition-all duration-200 relative flex flex-col justify-between text-left"
               >
-                {/* Header row with Code & More Menu */}
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-1.5 flex-wrap">
-                      <span className="text-xs font-mono font-bold text-red-400 px-2 py-0.5 rounded bg-red-950/60 border border-red-800/40">
-                        {subj.code || 'CORE'}
-                      </span>
-                      {subj.archived && (
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-950/60 border border-blue-800/40 text-blue-300">
-                          Archived
-                        </span>
-                      )}
-                      {isFailed && (
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-950/70 border border-amber-800/50 text-amber-300 flex items-center gap-1">
-                          <AlertCircle className="w-3 h-3 text-amber-400" />
-                          <span>Needs Analysis</span>
-                        </span>
-                      )}
+                {/* 1. Subject Name & Header Menu */}
+                <div>
+                  <div className="flex items-start justify-between gap-3 mb-2.5 sm:mb-3">
+                    <h3 className="text-[20px] sm:text-[22px] font-bold text-[#28263A] leading-[1.3] break-words flex-1">
+                      {subjectTitle}
+                    </h3>
+                    <div className="shrink-0 -mt-1 -mr-1">
+                      <SubjectMoreMenu
+                        subject={subj}
+                        buttonClassName="p-2 rounded-xl text-[#777589] hover:text-[#28263A] hover:bg-[#EAE5FF]/50 border border-transparent hover:border-[#EEEAF4] transition-all focus:outline-none"
+                      />
                     </div>
-
-                    {/* [⋮] More Options Menu */}
-                    <SubjectMoreMenu subject={subj} />
                   </div>
 
-                  {/* Title & Description */}
-                  <h3 className="text-base font-bold text-white leading-snug line-clamp-1">
-                    {subj.name}
-                  </h3>
-                  <p className="text-xs text-zinc-400 line-clamp-2 leading-relaxed">
-                    {subj.description || 'University syllabus component imported into Syllora AI.'}
+                  {/* 2. Subject Code Badge */}
+                  <div className="flex items-center gap-2 flex-wrap mb-3">
+                    <span className="inline-flex items-center text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#EAE5FF] text-[#7C6EE6] border border-[#D9D2F8]/60 font-mono">
+                      {subj.code || 'CST-004 / CSO-053'}
+                    </span>
+                    {subj.archived && (
+                      <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-[#FFE0D2] text-[#E5A044] border border-[#FFCBB3]">
+                        Archived
+                      </span>
+                    )}
+                    {isFailed && (
+                      <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-rose-50 text-rose-600 border border-rose-200 flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3 text-rose-500" />
+                        <span>Needs Analysis</span>
+                      </span>
+                    )}
+                  </div>
+
+                  {/* 3. Subject Description */}
+                  <p className="text-xs sm:text-sm text-[#777589] line-clamp-2 leading-relaxed mb-3">
+                    {subj.description || 'Comprehensive curriculum study material and syllabus breakdown.'}
                   </p>
 
-                  {/* Upload Date & Metadata */}
-                  <div className="flex items-center gap-1.5 text-[11px] text-zinc-500 font-mono pt-1">
-                    <Clock className="w-3 h-3 text-zinc-500" />
+                  {/* 4. Upload Date */}
+                  <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-[#777589]">
+                    <Clock className="w-3.5 h-3.5 text-[#7C6EE6]" />
                     <span>Uploaded {formattedDate}</span>
                   </div>
                 </div>
 
-                {/* Metrics & Progress or Retry Prompt */}
-                <div className="space-y-3 pt-3 border-t border-zinc-900/80">
+                {/* 5. Divider & Following Sections */}
+                <div className="space-y-3 pt-3.5 mt-3.5 border-t border-[#EEEAF4]">
                   {isFailed ? (
                     <div className="space-y-2">
-                      <div className="p-2.5 rounded-xl bg-amber-950/30 border border-amber-900/50 text-amber-300 text-xs flex items-start gap-2">
-                        <AlertCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                        <span className="leading-snug text-[11px]">
-                          Syllabus is safely saved. Click below to retry AI analysis without re-uploading.
+                      <div className="p-3 rounded-2xl bg-amber-50 border border-amber-200 text-amber-800 text-xs flex items-start gap-2">
+                        <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                        <span className="leading-snug">
+                          Syllabus text is safely saved. Click below to retry AI analysis without re-uploading.
                         </span>
                       </div>
                       <button
                         onClick={(e) => handleRetryAnalysis(e, subj.id)}
                         disabled={isAnalyzing}
-                        className="w-full flex items-center justify-center gap-2 py-2 px-3.5 rounded-xl text-xs font-bold bg-amber-950/80 hover:bg-amber-900/80 text-amber-200 border border-amber-700/60 transition-all"
+                        className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs font-bold bg-[#EAE5FF] hover:bg-[#ded7ff] text-[#7C6EE6] border border-[#D9D2F8] transition-all"
                       >
                         {isAnalyzing ? (
                           <>
@@ -327,35 +341,40 @@ export const MySubjectsView: React.FC = () => {
                     </div>
                   ) : (
                     <>
-                      <div className="flex items-center justify-between text-xs text-zinc-400 font-mono">
-                        <span>{subj.units.length} Units • {allTopics.length} Topics</span>
-                        <span className="text-zinc-200 font-bold">{progress}%</span>
+                      {/* 6. Units Count, Topics Count, and Completion Percentage */}
+                      <div className="flex items-center justify-between text-xs sm:text-sm">
+                        <span className="text-[#777589] font-medium">
+                          {subj.units.length} Units • {allTopics.length} Topics
+                        </span>
+                        <span className="text-[#28263A] font-bold">{progress}%</span>
                       </div>
 
-                      <div className="w-full h-1.5 bg-zinc-900 rounded-full overflow-hidden">
+                      {/* 7. Progress Bar */}
+                      <div className="w-full h-2 bg-[#F3F0F8] rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-gradient-to-r from-red-600 to-rose-500 rounded-full transition-all duration-300"
+                          className="h-full bg-gradient-to-r from-[#7C6EE6] to-[#A99EFA] rounded-full transition-all duration-300"
                           style={{ width: `${progress}%` }}
                         />
                       </div>
 
+                      {/* 8. Exam Date */}
                       {subj.examDate && (
-                        <div className="flex items-center gap-1.5 text-[11px] text-zinc-400 font-mono">
-                          <Calendar className="w-3 h-3 text-red-400" />
+                        <div className="flex items-center gap-1.5 text-xs text-[#E5A044] font-medium pt-1">
+                          <Calendar className="w-3.5 h-3.5 text-[#E5A044]" />
                           <span>Exam: {subj.examDate}</span>
                         </div>
                       )}
 
-                      {/* Open Subject Button */}
+                      {/* 9. Continue Preparation Button */}
                       <button
                         onClick={() => {
                           setActiveSubject(subj);
                           setActiveTab('subject-detail');
                         }}
-                        className="w-full flex items-center justify-center gap-2 py-2 px-3.5 rounded-xl text-xs font-bold bg-[#141422] hover:bg-red-600/20 text-zinc-200 hover:text-white border border-red-950 hover:border-red-600/40 transition-all group"
+                        className="w-full mt-2 flex items-center justify-center gap-2 py-2.5 px-4 rounded-2xl text-xs sm:text-sm font-bold bg-[#7C6EE6] hover:bg-[#6A5AD6] text-white shadow-sm transition-all group cursor-pointer"
                       >
                         <span>Continue Preparation</span>
-                        <ArrowRight className="w-3.5 h-3.5 text-red-500 group-hover:translate-x-0.5 transition-transform" />
+                        <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
                       </button>
                     </>
                   )}

@@ -99,14 +99,25 @@ export const AuthModal: React.FC = () => {
           </button>
         </div>
 
-        <div className="space-y-1 text-left">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EAE5FF] border border-[#D9D2F8] text-[#7C6EE6] text-[10px] font-bold">
-            <Sparkles className="w-3 h-3 text-[#7C6EE6]" />
-            <span>SYLLORA AI SECURE ACCESS</span>
+        <div className="space-y-3 text-left">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-full bg-white p-0.5 shadow-[0_2px_10px_rgba(24,47,83,0.12)] border border-[#EEEAF4] shrink-0">
+              <img
+                src="/syllora-logo.png"
+                alt="SYLLORA AI Logo"
+                className="w-full h-full object-contain rounded-full"
+              />
+            </div>
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#EAE5FF] border border-[#D9D2F8] text-[#182F53] text-[10px] font-bold">
+                <span className="text-[#D9A441]">✦</span>
+                <span>SYLLORA AI SECURE ACCESS</span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-extrabold text-[#182F53] mt-0.5">
+                {authMode === 'login' ? 'Welcome Back!' : 'Join Syllora AI Today'}
+              </h2>
+            </div>
           </div>
-          <h2 className="text-xl sm:text-2xl font-extrabold text-[#28263A]">
-            {authMode === 'login' ? 'Welcome Back!' : 'Join Syllora AI Today'}
-          </h2>
           <p className="text-xs text-[#777589]">
             {authMode === 'login'
               ? 'Continue your exam preparation with your personalized notes.'

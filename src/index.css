@@ -17,6 +17,10 @@
     --border-subtle: #EEEAF4;
     --success: #319B78;
     --warning: #E5A044;
+    --navy-primary: #182F53;
+    --navy-accent: #2457A7;
+    --teal-accent: #159E9A;
+    --gold-accent: #D9A441;
   }
 
   body {

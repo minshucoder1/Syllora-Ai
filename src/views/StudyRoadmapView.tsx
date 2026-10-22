@@ -540,8 +540,8 @@ export const StudyRoadmapView: React.FC = () => {
             </div>
 
             {/* AI Analysis & Diagnostics Card */}
-            <div className="p-5 sm:p-6 rounded-2xl bg-[#090910] border border-red-950/40 space-y-4">
-              <div className="flex items-center justify-between border-b border-zinc-900 pb-3">
+            <div className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EEEAF4] shadow-sm space-y-4">
+              <div className="flex items-center justify-between border-b border-[#EEEAF4] pb-3">
                 <div className="flex items-center gap-2">
                   <BrainCircuit className="w-4 h-4 text-[#7C6EE6]" />
                   <h3 className="text-xs font-bold text-[#28263A] uppercase tracking-wider font-mono">
@@ -846,22 +846,22 @@ export const StudyRoadmapView: React.FC = () => {
 
       {/* CREATE ROADMAP MODAL */}
       {showCreateModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in overflow-y-auto">
-          <div className="w-full max-w-2xl bg-[#0b0b14] border border-red-950/70 rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.9)] p-6 space-y-6 max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-fade-in overflow-y-auto">
+          <div className="w-full max-w-2xl bg-white border border-[#EEEAF4] rounded-3xl shadow-[0_20px_60px_rgba(40,38,58,0.15)] p-6 sm:p-7 space-y-6 max-h-[90vh] overflow-y-auto">
             {/* Modal Header */}
-            <div className="flex items-center justify-between border-b border-zinc-900 pb-4">
+            <div className="flex items-center justify-between border-b border-[#EEEAF4] pb-4">
               <div className="space-y-0.5">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-red-400 font-bold">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-[#7C6EE6] font-bold">
                   AI Study Architect
                 </span>
-                <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                  <Compass className="w-5 h-5 text-red-500" />
+                <h2 className="text-xl font-bold text-[#28263A] flex items-center gap-2">
+                  <Compass className="w-5 h-5 text-[#7C6EE6]" />
                   <span>Build My Study Roadmap</span>
                 </h2>
               </div>
               <button
                 onClick={() => setShowCreateModal(false)}
-                className="text-zinc-500 hover:text-white transition-colors"
+                className="text-[#777589] hover:text-[#28263A] transition-colors p-1"
               >
                 ✕
               </button>
@@ -870,7 +870,7 @@ export const StudyRoadmapView: React.FC = () => {
             <form onSubmit={handleGenerateRoadmap} className="space-y-5">
               {/* Scope Selection */}
               <div className="space-y-2">
-                <label className="text-xs font-bold text-zinc-300 uppercase tracking-wider font-mono">
+                <label className="text-xs font-bold text-[#28263A] uppercase tracking-wider font-mono">
                   1. What do you want to prepare for?
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -884,10 +884,10 @@ export const StudyRoadmapView: React.FC = () => {
                       key={scope.id}
                       type="button"
                       onClick={() => setFormTargetScope(scope.id as any)}
-                      className={`p-3 rounded-xl text-xs font-bold border transition-all text-center ${
+                      className={`p-3 rounded-2xl text-xs font-bold border transition-all text-center ${
                         formTargetScope === scope.id
-                          ? 'bg-red-600/20 border-red-600 text-white shadow-[0_0_15px_rgba(239,68,68,0.25)]'
-                          : 'bg-[#12121e] border-zinc-900 text-zinc-400 hover:text-zinc-200 hover:border-zinc-800'
+                          ? 'bg-[#EAE5FF] border-[#7C6EE6] text-[#7C6EE6] shadow-sm'
+                          : 'bg-[#FFFDF9] border-[#EEEAF4] text-[#777589] hover:text-[#28263A] hover:border-[#D9D2F8]'
                       }`}
                     >
                       {scope.label}
@@ -899,7 +899,7 @@ export const StudyRoadmapView: React.FC = () => {
               {/* Subject Dropdown or Custom Topic */}
               {formTargetScope === 'specific_topic' ? (
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-zinc-300">
+                  <label className="text-xs font-bold text-[#28263A]">
                     Topic Name (Concept, Algorithm, Problem, or Subject Topic)
                   </label>
                   <input
@@ -907,20 +907,20 @@ export const StudyRoadmapView: React.FC = () => {
                     value={formCustomTopic}
                     onChange={(e) => setFormCustomTopic(e.target.value)}
                     placeholder="e.g., Binary Search Trees, Matrix Inverse, Newton's Laws"
-                    className="w-full bg-[#12121e] border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-red-600"
+                    className="w-full bg-[#FFFDF9] border border-[#EEEAF4] rounded-2xl px-4 py-2.5 text-sm text-[#28263A] placeholder-[#777589]/60 focus:outline-none focus:border-[#7C6EE6] shadow-sm"
                     required
                   />
-                  <p className="text-[11px] text-zinc-400">
+                  <p className="text-[11px] text-[#777589]">
                     📚 Independent mode: Generates a complete learning and exam package without requiring an uploaded syllabus.
                   </p>
                 </div>
               ) : (
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-zinc-300">Choose Syllabus Subject</label>
+                  <label className="text-xs font-bold text-[#28263A]">Choose Syllabus Subject</label>
                   <select
                     value={formSubjectId}
                     onChange={(e) => setFormSubjectId(e.target.value)}
-                    className="w-full bg-[#12121e] border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-red-600"
+                    className="w-full bg-[#FFFDF9] border border-[#EEEAF4] rounded-2xl px-4 py-2.5 text-sm text-[#28263A] focus:outline-none focus:border-[#7C6EE6] font-medium shadow-sm"
                   >
                     {subjects.map((s) => (
                       <option key={s.id} value={s.id}>
@@ -933,19 +933,19 @@ export const StudyRoadmapView: React.FC = () => {
 
               {/* Sub-Selection for Units or Topics */}
               {formTargetScope === 'selected_units' && currentSubjectObj && (
-                <div className="space-y-2 p-3 rounded-xl bg-[#0e0e18] border border-zinc-900">
-                  <span className="text-xs font-bold text-zinc-300 block">Select Units to Include:</span>
+                <div className="space-y-2 p-4 rounded-2xl bg-[#FFFDF9] border border-[#EEEAF4]">
+                  <span className="text-xs font-bold text-[#28263A] block">Select Units to Include:</span>
                   <div className="space-y-1.5 max-h-40 overflow-y-auto pr-1">
                     {currentSubjectObj.units.map((u) => (
                       <label
                         key={u.id}
-                        className="flex items-center gap-2 text-xs text-zinc-300 hover:text-white cursor-pointer"
+                        className="flex items-center gap-2 text-xs text-[#28263A] hover:text-[#7C6EE6] cursor-pointer"
                       >
                         <input
                           type="checkbox"
                           checked={formSelectedUnits.includes(u.name)}
                           onChange={() => toggleUnitSelect(u.name)}
-                          className="rounded border-zinc-700 text-red-600 focus:ring-0"
+                          className="rounded border-[#EEEAF4] text-[#7C6EE6] focus:ring-0"
                         />
                         <span>{u.name}</span>
                       </label>
@@ -955,19 +955,19 @@ export const StudyRoadmapView: React.FC = () => {
               )}
 
               {formTargetScope === 'selected_topics' && currentSubjectObj && (
-                <div className="space-y-2 p-3 rounded-xl bg-[#0e0e18] border border-zinc-900">
-                  <span className="text-xs font-bold text-zinc-300 block">Select Topics to Include:</span>
+                <div className="space-y-2 p-4 rounded-2xl bg-[#FFFDF9] border border-[#EEEAF4]">
+                  <span className="text-xs font-bold text-[#28263A] block">Select Topics to Include:</span>
                   <div className="space-y-1.5 max-h-48 overflow-y-auto pr-1">
                     {currentSubjectObj.units.flatMap((u) => u.topics).map((t) => (
                       <label
                         key={t.id}
-                        className="flex items-center gap-2 text-xs text-zinc-300 hover:text-white cursor-pointer"
+                        className="flex items-center gap-2 text-xs text-[#28263A] hover:text-[#7C6EE6] cursor-pointer"
                       >
                         <input
                           type="checkbox"
                           checked={formSelectedTopics.includes(t.name)}
                           onChange={() => toggleTopicSelect(t.name)}
-                          className="rounded border-zinc-700 text-red-600 focus:ring-0"
+                          className="rounded border-[#EEEAF4] text-[#7C6EE6] focus:ring-0"
                         />
                         <span>{t.name}</span>
                       </label>
@@ -980,12 +980,12 @@ export const StudyRoadmapView: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Exam Date */}
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-zinc-300">Exam Date</label>
+                  <label className="text-xs font-bold text-[#28263A]">Exam Date</label>
                   <input
                     type="date"
                     value={formExamDate}
                     onChange={(e) => setFormExamDate(e.target.value)}
-                    className="w-full bg-[#12121e] border border-zinc-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-red-600 font-mono"
+                    className="w-full bg-[#FFFDF9] border border-[#EEEAF4] rounded-2xl px-4 py-2.5 text-xs text-[#28263A] focus:outline-none focus:border-[#7C6EE6] font-mono shadow-sm"
                     required
                   />
                   {/* Preset Chips */}
@@ -1003,7 +1003,7 @@ export const StudyRoadmapView: React.FC = () => {
                           d.setDate(d.getDate() + chip.days);
                           setFormExamDate(d.toISOString().split('T')[0]);
                         }}
-                        className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 border border-zinc-800"
+                        className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#EAE5FF] hover:bg-[#ded7ff] text-[#7C6EE6] border border-[#D9D2F8]"
                       >
                         {chip.label}
                       </button>
@@ -1013,7 +1013,7 @@ export const StudyRoadmapView: React.FC = () => {
 
                 {/* Available Study Time */}
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-zinc-300">Available Study Time</label>
+                  <label className="text-xs font-bold text-[#28263A]">Available Study Time</label>
                   <div className="grid grid-cols-3 gap-1.5">
                     {[
                       { min: 60, label: '1 hr/day' },
@@ -1024,10 +1024,10 @@ export const StudyRoadmapView: React.FC = () => {
                         key={time.min}
                         type="button"
                         onClick={() => setFormDailyStudyMinutes(time.min)}
-                        className={`p-2 rounded-xl text-xs font-bold border text-center transition-all ${
+                        className={`p-2 rounded-2xl text-xs font-bold border text-center transition-all ${
                           formDailyStudyMinutes === time.min
-                            ? 'bg-red-600/20 border-red-600 text-white'
-                            : 'bg-[#12121e] border-zinc-900 text-zinc-400 hover:text-zinc-200'
+                            ? 'bg-[#CFF5E7] border-[#A9E8D2] text-[#319B78] shadow-sm'
+                            : 'bg-[#FFFDF9] border-[#EEEAF4] text-[#777589] hover:text-[#28263A]'
                         }`}
                       >
                         {time.label}
@@ -1041,17 +1041,17 @@ export const StudyRoadmapView: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Level */}
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-zinc-300">Current Level</label>
+                  <label className="text-xs font-bold text-[#28263A]">Current Level</label>
                   <div className="grid grid-cols-3 gap-1.5">
                     {['Beginner', 'Intermediate', 'Advanced'].map((lvl) => (
                       <button
                         key={lvl}
                         type="button"
                         onClick={() => setFormCurrentLevel(lvl as any)}
-                        className={`p-2 rounded-xl text-xs font-bold border text-center transition-all ${
+                        className={`p-2 rounded-2xl text-xs font-bold border text-center transition-all ${
                           formCurrentLevel === lvl
-                            ? 'bg-red-600/20 border-red-600 text-white'
-                            : 'bg-[#12121e] border-zinc-900 text-zinc-400 hover:text-zinc-200'
+                            ? 'bg-[#EAE5FF] border-[#7C6EE6] text-[#7C6EE6] shadow-sm'
+                            : 'bg-[#FFFDF9] border-[#EEEAF4] text-[#777589] hover:text-[#28263A]'
                         }`}
                       >
                         {lvl}
@@ -1062,17 +1062,17 @@ export const StudyRoadmapView: React.FC = () => {
 
                 {/* Language */}
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-zinc-300">Preferred Language</label>
+                  <label className="text-xs font-bold text-[#28263A]">Preferred Language</label>
                   <div className="grid grid-cols-3 gap-1.5">
                     {['English', 'Hindi', 'Hinglish'].map((lang) => (
                       <button
                         key={lang}
                         type="button"
                         onClick={() => setFormPreferredLanguage(lang as any)}
-                        className={`p-2 rounded-xl text-xs font-bold border text-center transition-all ${
+                        className={`p-2 rounded-2xl text-xs font-bold border text-center transition-all ${
                           formPreferredLanguage === lang
-                            ? 'bg-red-600/20 border-red-600 text-white'
-                            : 'bg-[#12121e] border-zinc-900 text-zinc-400 hover:text-zinc-200'
+                            ? 'bg-[#FFE0D2] border-[#FFCBB3] text-[#E5A044] shadow-sm'
+                            : 'bg-[#FFFDF9] border-[#EEEAF4] text-[#777589] hover:text-[#28263A]'
                         }`}
                       >
                         {lang}
@@ -1083,18 +1083,18 @@ export const StudyRoadmapView: React.FC = () => {
               </div>
 
               {/* Submit Buttons */}
-              <div className="flex items-center justify-end gap-3 pt-4 border-t border-zinc-900">
+              <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#EEEAF4]">
                 <button
                   type="button"
                   onClick={() => setShowCreateModal(false)}
-                  className="px-4 py-2.5 rounded-xl text-xs font-semibold text-zinc-400 hover:text-white transition-colors"
+                  className="px-4 py-2.5 rounded-2xl text-xs font-semibold text-[#777589] hover:text-[#28263A] transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isGenerating}
-                  className="btn-red-glow px-6 py-2.5 rounded-xl text-xs font-bold text-white flex items-center gap-2"
+                  className="btn-pastel-primary px-6 py-2.5 rounded-2xl text-xs font-bold text-white flex items-center gap-2 shadow-sm"
                 >
                   {isGenerating ? (
                     <>
@@ -1116,49 +1116,49 @@ export const StudyRoadmapView: React.FC = () => {
 
       {/* ADAPTATION SIMULATION MODAL */}
       {showAdaptModal && selectedRoadmap && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
-          <div className="w-full max-w-lg bg-[#0b0b14] border border-amber-950/70 rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.9)] p-6 space-y-5">
-            <div className="flex items-center justify-between border-b border-zinc-900 pb-3">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-fade-in">
+          <div className="w-full max-w-lg bg-white border border-[#EEEAF4] rounded-3xl shadow-[0_20px_60px_rgba(40,38,58,0.15)] p-6 space-y-5">
+            <div className="flex items-center justify-between border-b border-[#EEEAF4] pb-3">
               <div className="space-y-0.5">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-amber-400 font-bold">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-[#E5A044] font-bold">
                   Autonomous Rebalancer
                 </span>
-                <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                  <Sliders className="w-4 h-4 text-amber-500" />
+                <h2 className="text-lg font-bold text-[#28263A] flex items-center gap-2">
+                  <Sliders className="w-4 h-4 text-[#E5A044]" />
                   <span>Adapt Roadmap to Performance</span>
                 </h2>
               </div>
               <button
                 onClick={() => setShowAdaptModal(false)}
-                className="text-zinc-500 hover:text-white transition-colors"
+                className="text-[#777589] hover:text-[#28263A] transition-colors"
               >
                 ✕
               </button>
             </div>
 
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              When a student scores poorly on a topic (e.g. 40%), StudyAI autonomously inserts remediation drills (10 questions, numericals, mini-quizzes). When scoring high (&gt;80%), StudyAI accelerates the schedule.
+            <p className="text-xs text-[#777589] leading-relaxed">
+              When a student scores poorly on a topic (e.g. 40%), Syllora AI autonomously inserts remediation drills (10 questions, numericals, mini-quizzes). When scoring high (&gt;80%), Syllora AI accelerates the schedule.
             </p>
 
             <form onSubmit={handleAdaptRoadmap} className="space-y-4">
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-zinc-300">Target Topic Tested</label>
+                <label className="text-xs font-bold text-[#28263A]">Target Topic Tested</label>
                 <input
                   type="text"
                   value={adaptTopicName}
                   onChange={(e) => setAdaptTopicName(e.target.value)}
                   placeholder="e.g. Matrix Inverse, Binary Search, Deadlocks"
-                  className="w-full bg-[#12121e] border border-zinc-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-600"
+                  className="w-full bg-[#FFFDF9] border border-[#EEEAF4] rounded-2xl px-4 py-2.5 text-xs text-[#28263A] focus:outline-none focus:border-[#7C6EE6]"
                   required
                 />
               </div>
 
               <div className="space-y-1.5">
                 <div className="flex justify-between text-xs">
-                  <label className="font-bold text-zinc-300">Test Score Achieved</label>
+                  <label className="font-bold text-[#28263A]">Test Score Achieved</label>
                   <span
                     className={`font-mono font-bold ${
-                      adaptScorePercent < 65 ? 'text-amber-400' : 'text-emerald-400'
+                      adaptScorePercent < 65 ? 'text-[#E5A044]' : 'text-[#319B78]'
                     }`}
                   >
                     {adaptScorePercent}% ({adaptScorePercent < 65 ? 'Weakness Detected' : 'Mastery Demonstrated'})
@@ -1170,16 +1170,16 @@ export const StudyRoadmapView: React.FC = () => {
                   max="100"
                   value={adaptScorePercent}
                   onChange={(e) => setAdaptScorePercent(Number(e.target.value))}
-                  className="w-full accent-amber-500"
+                  className="w-full accent-[#7C6EE6]"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-zinc-300">Assessment Type</label>
+                <label className="text-xs font-bold text-[#28263A]">Assessment Type</label>
                 <select
                   value={adaptAssessmentType}
                   onChange={(e) => setAdaptAssessmentType(e.target.value)}
-                  className="w-full bg-[#12121e] border border-zinc-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-600"
+                  className="w-full bg-[#FFFDF9] border border-[#EEEAF4] rounded-2xl px-3 py-2 text-xs text-[#28263A] focus:outline-none focus:border-[#7C6EE6]"
                 >
                   <option value="MCQ Quiz">MCQ Quiz</option>
                   <option value="AI Professor Rubric">Answer Checker Rubric</option>
@@ -1189,28 +1189,28 @@ export const StudyRoadmapView: React.FC = () => {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-zinc-300">Specific Gap Notes</label>
+                <label className="text-xs font-bold text-[#28263A]">Specific Gap Notes</label>
                 <input
                   type="text"
                   value={adaptWeakPoints}
                   onChange={(e) => setAdaptWeakPoints(e.target.value)}
                   placeholder="e.g. Inversion formula, boundary overflow"
-                  className="w-full bg-[#12121e] border border-zinc-800 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-amber-600"
+                  className="w-full bg-[#FFFDF9] border border-[#EEEAF4] rounded-2xl px-4 py-2.5 text-xs text-[#28263A] focus:outline-none focus:border-[#7C6EE6]"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-3 pt-3 border-t border-zinc-900">
+              <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#EEEAF4]">
                 <button
                   type="button"
                   onClick={() => setShowAdaptModal(false)}
-                  className="px-4 py-2 text-xs font-semibold text-zinc-400 hover:text-white"
+                  className="px-4 py-2 text-xs font-semibold text-[#777589] hover:text-[#28263A]"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isAdapting}
-                  className="px-5 py-2.5 rounded-xl text-xs font-bold bg-amber-600 hover:bg-amber-500 text-black flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(245,158,11,0.3)]"
+                  className="btn-pastel-primary px-5 py-2.5 rounded-2xl text-xs font-bold text-white flex items-center gap-2 transition-all shadow-sm"
                 >
                   {isAdapting ? (
                     <>

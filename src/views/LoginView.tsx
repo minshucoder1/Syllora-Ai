@@ -72,15 +72,20 @@ export const LoginView: React.FC = () => {
           </div>
 
           <div className="space-y-3">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl bg-[#7C6EE6] flex items-center justify-center shadow-[0_4px_16px_rgba(124,110,230,0.3)] text-white">
-                <BrainCircuit className="w-6 h-6 text-white" />
+            <div className="flex items-center gap-3.5">
+              <div className="w-14 h-14 rounded-full bg-white p-1 shadow-[0_4px_16px_rgba(24,47,83,0.15)] border border-[#EEEAF4] shrink-0">
+                <img
+                  src="/syllora-logo.png"
+                  alt="SYLLORA AI Logo"
+                  className="w-full h-full object-contain rounded-full"
+                />
               </div>
               <div>
-                <h1 className="text-3xl sm:text-4xl font-extrabold text-[#28263A] tracking-tight">
-                  SYLLORA <span className="text-[#7C6EE6]">AI</span>
+                <h1 className="text-3xl sm:text-4xl font-extrabold text-[#182F53] tracking-tight flex items-center gap-1">
+                  SYLLORA <span className="text-[#159E9A]">AI</span>
+                  <span className="text-[#D9A441] text-xs -mt-2">✦</span>
                 </h1>
-                <p className="text-xs text-[#777589] font-medium">Developed by Minshu Kumar</p>
+                <p className="text-xs text-[#777589] font-medium">Your AI Study Companion • By Minshu Kumar</p>
               </div>
             </div>
 

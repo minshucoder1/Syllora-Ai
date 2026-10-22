@@ -113,11 +113,19 @@ export const DashboardHome: React.FC = () => {
         {/* Soft Pastel Aesthetic Illustration */}
         <div className="hidden lg:flex items-center justify-center p-6 bg-gradient-to-tr from-[#EAE5FF]/80 via-[#FFF0B8]/40 to-[#FFE0D2]/60 rounded-3xl border border-[#EEEAF4] shadow-sm relative w-72 h-48 flex-shrink-0">
           <div className="text-center space-y-2">
-            <div className="w-16 h-16 rounded-2xl bg-white shadow-md flex items-center justify-center mx-auto text-[#7C6EE6]">
-              <BookOpen className="w-8 h-8" />
+            <div className="w-18 h-18 rounded-full bg-white shadow-md p-1 flex items-center justify-center mx-auto border border-[#EEEAF4] overflow-hidden">
+              <img
+                src="/syllora-logo.png"
+                alt="SYLLORA AI Logo"
+                className="w-full h-full object-contain rounded-full"
+              />
             </div>
-            <div className="text-xs font-bold text-[#28263A]">Smart Syllabus AI</div>
-            <div className="text-[11px] text-[#777589]">Real-time notes & doubt solver</div>
+            <div className="text-xs font-bold text-[#182F53] flex items-center justify-center gap-1 leading-none">
+              <span>SYLLORA</span>
+              <span className="text-[#159E9A]">AI</span>
+              <span className="text-[#D9A441] text-[10px]">✦</span>
+            </div>
+            <div className="text-[11px] text-[#777589]">Your AI Study Companion</div>
           </div>
           <span className="absolute top-3 right-3 text-lg">🌸</span>
           <span className="absolute bottom-3 left-3 text-lg">✨</span>
@@ -378,21 +386,32 @@ export const DashboardHome: React.FC = () => {
                     key={subj.id}
                     className="p-5 rounded-3xl bg-white border border-[#EEEAF4] hover:border-[#D9D2F8] shadow-sm hover:shadow-md transition-all space-y-4 relative flex flex-col justify-between"
                   >
-                    <div className="space-y-2">
-                      <div className="flex items-start justify-between gap-2">
-                        <span className="text-xs font-bold text-[#7C6EE6] px-2.5 py-0.5 rounded-full bg-[#EAE5FF]">
-                          {subj.code || 'CORE'}
-                        </span>
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs text-[#777589]">
-                            {subj.units.length} Units • {sTopics.length} Topics
-                          </span>
-                          <SubjectMoreMenu subject={subj} />
+                    {(() => {
+                      const subjectTitle =
+                        (subj.name && subj.name.trim()) ||
+                        (subj as any).title ||
+                        (subj as any).subjectName ||
+                        (subj.syllabusFileName ? subj.syllabusFileName.replace(/\.[^/.]+$/, '') : '') ||
+                        subj.code ||
+                        'Untitled Subject';
+                      return (
+                        <div className="space-y-2">
+                          <div className="flex items-start justify-between gap-2">
+                            <span className="text-xs font-bold text-[#7C6EE6] px-2.5 py-0.5 rounded-full bg-[#EAE5FF] font-mono">
+                              {subj.code || 'CORE'}
+                            </span>
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs text-[#777589]">
+                                {subj.units.length} Units • {sTopics.length} Topics
+                              </span>
+                              <SubjectMoreMenu subject={subj} />
+                            </div>
+                          </div>
+                          <h3 className="text-base font-bold text-[#28263A] leading-tight break-words">{subjectTitle}</h3>
+                          <p className="text-xs text-[#777589] line-clamp-2">{subj.description || 'Complete curriculum syllabus'}</p>
                         </div>
-                      </div>
-                      <h3 className="text-base font-bold text-[#28263A] leading-tight">{subj.name}</h3>
-                      <p className="text-xs text-[#777589] line-clamp-2">{subj.description || 'Complete curriculum syllabus'}</p>
-                    </div>
+                      );
+                    })()}
 
                     <div className="space-y-3 pt-3 border-t border-[#EEEAF4]">
                       <div className="space-y-1.5">

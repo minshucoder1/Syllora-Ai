@@ -18,7 +18,7 @@ import {
   ChevronUp,
   Sparkles,
   ArrowLeft,
-  Trash2,
+  Calendar,
 } from 'lucide-react';
 
 export const SubjectDetailView: React.FC = () => {
@@ -44,11 +44,14 @@ export const SubjectDetailView: React.FC = () => {
   if (!subject) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-16 text-center space-y-4">
-        <h2 className="text-xl font-bold text-white">No Subject Selected</h2>
-        <p className="text-sm text-zinc-400">Please choose or add a syllabus to begin studying.</p>
+        <div className="w-16 h-16 rounded-3xl bg-[#EAE5FF] text-[#7C6EE6] flex items-center justify-center mx-auto shadow-sm">
+          <BookOpen className="w-8 h-8" />
+        </div>
+        <h2 className="text-xl font-bold text-[#28263A]">No Subject Selected</h2>
+        <p className="text-sm text-[#777589]">Please choose or add a syllabus to begin studying.</p>
         <button
           onClick={() => setActiveTab('add-syllabus')}
-          className="btn-red-glow px-4 py-2 rounded-xl text-xs font-bold text-white"
+          className="btn-pastel-primary px-5 py-2.5 rounded-2xl text-xs font-bold text-white shadow-sm"
         >
           Add Syllabus
         </button>
@@ -70,84 +73,97 @@ export const SubjectDetailView: React.FC = () => {
   );
   const progressPercent = totalTopics > 0 ? Math.round((completedTopics / totalTopics) * 100) : 0;
 
+  const subjectTitle =
+    (subject.name && subject.name.trim()) ||
+    (subject as any).title ||
+    (subject as any).subjectName ||
+    (subject.syllabusFileName ? subject.syllabusFileName.replace(/\.[^/.]+$/, '') : '') ||
+    subject.code ||
+    'Untitled Subject';
+
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-6">
       {/* Top Navigation */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap gap-3">
         <button
-          onClick={() => setActiveTab('dashboard')}
-          className="flex items-center gap-1.5 text-xs text-zinc-400 hover:text-white transition-colors"
+          onClick={() => setActiveTab('subjects')}
+          className="flex items-center gap-2 text-xs font-semibold text-[#777589] hover:text-[#7C6EE6] transition-colors"
         >
-          <ArrowLeft className="w-4 h-4 text-red-500" />
-          <span>Back to Dashboard</span>
+          <ArrowLeft className="w-4 h-4 text-[#7C6EE6]" />
+          <span>Back to My Subjects</span>
         </button>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           <button
             onClick={() => {
               setActiveSubject(subject);
               setActiveTab('cheatsheets');
             }}
-            className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#12121c] hover:bg-zinc-800 border border-red-950 text-zinc-200"
+            className="px-3.5 py-2 rounded-2xl text-xs font-semibold bg-white hover:bg-[#FFFDF9] border border-[#EEEAF4] text-[#28263A] transition-all shadow-sm"
           >
-            Generate Cheat Sheet
+            Cheat Sheet
           </button>
           <button
             onClick={() => {
               setActiveSubject(subject);
               setActiveTab('paper-generator');
             }}
-            className="btn-red-glow px-3 py-1.5 rounded-lg text-xs font-semibold text-white"
+            className="btn-pastel-primary px-3.5 py-2 rounded-2xl text-xs font-bold text-white shadow-sm"
           >
-            Generate Question Paper
+            Question Paper
           </button>
           <SubjectMoreMenu subject={subject} />
         </div>
       </div>
 
       {/* Subject Header Card */}
-      <div className="glass-panel-heavy rounded-2xl p-6 sm:p-8 border border-red-950/40 relative overflow-hidden space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-mono font-bold text-red-400 bg-red-950/60 px-2.5 py-0.5 rounded border border-red-800/40">
-                {subject.code || 'CORE'}
+      <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#EEEAF4] shadow-[0_4px_24px_rgba(40,38,58,0.04)] relative overflow-hidden space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-xs font-mono font-bold text-[#7C6EE6] bg-[#EAE5FF] px-2.5 py-0.5 rounded-full border border-[#D9D2F8]/60">
+                {subject.code || 'CST-004 / CSO-053'}
               </span>
-              <span className="text-xs text-zinc-400 font-mono">
+              <span className="text-xs text-[#777589] font-medium">
                 {subject.units.length} Units • {totalTopics} Topics
               </span>
+              {subject.examDate && (
+                <span className="text-xs text-[#E5A044] font-medium flex items-center gap-1 bg-[#FFE0D2]/50 px-2.5 py-0.5 rounded-full">
+                  <Calendar className="w-3 h-3 text-[#E5A044]" />
+                  <span>Exam: {subject.examDate}</span>
+                </span>
+              )}
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white">{subject.name}</h1>
-            <p className="text-xs sm:text-sm text-zinc-400 max-w-3xl leading-relaxed">
-              {subject.description}
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#28263A] leading-tight">
+              {subjectTitle}
+            </h1>
+            <p className="text-xs sm:text-sm text-[#777589] max-w-3xl leading-relaxed">
+              {subject.description || 'Comprehensive curriculum study material and syllabus breakdown.'}
             </p>
           </div>
 
-          <div className="flex-shrink-0 text-right space-y-1.5">
-            <div className="text-xs text-zinc-400">Preparation Progress</div>
-            <div className="text-2xl font-extrabold text-white font-mono">{progressPercent}%</div>
-            <div className="w-32 h-1.5 bg-zinc-900 rounded-full overflow-hidden ml-auto">
+          <div className="shrink-0 text-left sm:text-right space-y-1.5 p-4 rounded-2xl bg-[#FFFDF9] border border-[#EEEAF4]">
+            <div className="text-xs font-semibold text-[#777589]">Preparation Progress</div>
+            <div className="text-3xl font-black text-[#28263A] font-mono">{progressPercent}%</div>
+            <div className="w-36 h-2 bg-[#F3F0F8] rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-red-600 to-rose-500 rounded-full"
+                className="h-full bg-gradient-to-r from-[#7C6EE6] to-[#A99EFA] rounded-full transition-all duration-300"
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
           </div>
         </div>
-
-        {/* Ambient Glow */}
-        <div className="absolute right-0 top-0 w-72 h-full bg-red-600/5 rounded-full blur-3xl pointer-events-none" />
       </div>
 
       {/* Analysis Interrupted / Needs Retry Notice */}
       {(subject.analysisStatus === 'failed' || subject.units.length === 0) && (
-        <div className="p-4 sm:p-5 rounded-2xl bg-amber-950/40 border border-amber-800/60 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="p-5 rounded-3xl bg-amber-50 border border-amber-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1 text-left">
-            <h3 className="text-sm font-bold text-amber-200 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-amber-400" />
+            <h3 className="text-sm font-bold text-amber-900 flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-amber-600" />
               <span>Syllabus Safely Saved • AI Analysis Can Be Retried</span>
             </h3>
-            <p className="text-xs text-amber-300/80 leading-relaxed">
+            <p className="text-xs text-amber-800 leading-relaxed">
               Your syllabus text and uploaded files are permanently preserved in the database. You can generate or re-analyze the curriculum without uploading again.
             </p>
           </div>
@@ -161,7 +177,7 @@ export const SubjectDetailView: React.FC = () => {
               }
             }}
             disabled={isRetrying}
-            className="px-4 py-2.5 rounded-xl text-xs font-bold bg-amber-600 hover:bg-amber-500 text-white shadow-lg transition-all shrink-0 flex items-center gap-2"
+            className="px-4 py-2.5 rounded-2xl text-xs font-bold bg-[#7C6EE6] hover:bg-[#6A5AD6] text-white shadow-sm transition-all shrink-0 flex items-center gap-2"
           >
             {isRetrying ? (
               <>
@@ -180,8 +196,8 @@ export const SubjectDetailView: React.FC = () => {
 
       {/* Units & Curriculum Hierarchy */}
       <div className="space-y-4">
-        <h2 className="text-lg font-bold text-white flex items-center gap-2">
-          <BookOpen className="w-5 h-5 text-red-500" />
+        <h2 className="text-lg font-bold text-[#28263A] flex items-center gap-2">
+          <BookOpen className="w-5 h-5 text-[#7C6EE6]" />
           <span>Curriculum Modules & Study Material</span>
         </h2>
 
@@ -193,60 +209,60 @@ export const SubjectDetailView: React.FC = () => {
             return (
               <div
                 key={unit.id}
-                className="rounded-2xl bg-[#090910] border border-red-950/40 overflow-hidden transition-all shadow-md"
+                className="rounded-3xl bg-white border border-[#EEEAF4] overflow-hidden transition-all shadow-[0_4px_20px_rgba(40,38,58,0.03)] hover:border-[#D9D2F8]"
               >
                 {/* Unit Header Bar */}
                 <div
                   onClick={() => toggleUnitExpand(unit.id)}
-                  className="p-4 sm:p-5 bg-[#0e0e16] hover:bg-[#12121d] cursor-pointer flex items-center justify-between border-b border-red-950/30 transition-colors"
+                  className="p-5 bg-[#FFFDF9] hover:bg-[#EAE5FF]/20 cursor-pointer flex items-center justify-between border-b border-[#EEEAF4] transition-colors"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="w-7 h-7 rounded-lg bg-red-950/80 text-red-400 font-mono text-xs flex items-center justify-center font-bold border border-red-800/40">
+                    <span className="w-8 h-8 rounded-xl bg-[#EAE5FF] text-[#7C6EE6] font-mono text-xs flex items-center justify-center font-bold">
                       U{uIdx + 1}
                     </span>
                     <div>
-                      <h3 className="text-sm sm:text-base font-bold text-white">{unit.name}</h3>
-                      <div className="text-[11px] text-zinc-400">
+                      <h3 className="text-base font-bold text-[#28263A]">{unit.name}</h3>
+                      <div className="text-xs text-[#777589] font-medium">
                         {unit.topics.length} Topics • {uCompleted} Completed • {unit.weightage}% Exam Weightage
                       </div>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <span className="hidden sm:inline-block text-xs font-mono text-zinc-400">
+                    <span className="hidden sm:inline-block text-xs font-mono font-semibold text-[#7C6EE6] bg-[#EAE5FF] px-2.5 py-0.5 rounded-full">
                       {Math.round((uCompleted / Math.max(1, unit.topics.length)) * 100)}% Complete
                     </span>
                     {isExpanded ? (
-                      <ChevronUp className="w-4 h-4 text-zinc-400" />
+                      <ChevronUp className="w-4 h-4 text-[#777589]" />
                     ) : (
-                      <ChevronDown className="w-4 h-4 text-zinc-400" />
+                      <ChevronDown className="w-4 h-4 text-[#777589]" />
                     )}
                   </div>
                 </div>
 
                 {/* Topics List */}
                 {isExpanded && (
-                  <div className="p-3 sm:p-4 space-y-2">
-                    {unit.topics.map((topic, tIdx) => (
+                  <div className="p-4 sm:p-5 space-y-2.5">
+                    {unit.topics.map((topic) => (
                       <div
                         key={topic.id}
-                        className={`p-3 sm:p-4 rounded-xl border transition-all ${
+                        className={`p-4 rounded-2xl border transition-all ${
                           topic.completed
-                            ? 'bg-[#0a0a14]/60 border-zinc-900 opacity-80'
-                            : 'bg-[#0f0f18] border-red-950/50 hover:border-red-600/30'
+                            ? 'bg-[#FFFDF9]/60 border-[#EEEAF4] opacity-80'
+                            : 'bg-[#FFFDF9] border-[#EEEAF4] hover:border-[#D9D2F8]'
                         } flex flex-col md:flex-row md:items-center justify-between gap-3`}
                       >
                         {/* Topic info & toggle */}
                         <div className="flex items-start gap-3 flex-1">
                           <button
                             onClick={() => toggleTopicCompleted(topic.id)}
-                            className="mt-0.5 text-zinc-500 hover:text-red-500 transition-colors focus:outline-none"
+                            className="mt-0.5 text-[#777589] hover:text-[#7C6EE6] transition-colors focus:outline-none"
                             title={topic.completed ? 'Mark as incomplete' : 'Mark as complete (+10 XP)'}
                           >
                             {topic.completed ? (
-                              <CheckCircle2 className="w-5 h-5 text-emerald-500 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+                              <CheckCircle2 className="w-5 h-5 text-[#319B78]" />
                             ) : (
-                              <Circle className="w-5 h-5 text-zinc-600 hover:text-red-400" />
+                              <Circle className="w-5 h-5 text-[#EEEAF4] hover:text-[#7C6EE6]" />
                             )}
                           </button>
 
@@ -254,7 +270,7 @@ export const SubjectDetailView: React.FC = () => {
                             <div className="flex items-center gap-2 flex-wrap">
                               <span
                                 className={`text-sm font-bold ${
-                                  topic.completed ? 'line-through text-zinc-400' : 'text-zinc-100'
+                                  topic.completed ? 'line-through text-[#777589]' : 'text-[#28263A]'
                                 }`}
                               >
                                 {topic.name}
@@ -262,46 +278,46 @@ export const SubjectDetailView: React.FC = () => {
 
                               {/* Priority Pill */}
                               {topic.priority === 'very_important' && (
-                                <span className="text-[10px] font-bold font-mono px-2 py-0.2 rounded bg-red-950 text-red-400 border border-red-700/60 shadow-[0_0_8px_rgba(239,68,68,0.2)]">
+                                <span className="text-[10px] font-bold font-mono px-2.5 py-0.5 rounded-full bg-[#FFE0D2] text-[#E5A044] border border-[#FFCBB3]">
                                   🔥 Very Important
                                 </span>
                               )}
                               {topic.priority === 'important' && (
-                                <span className="text-[10px] font-bold font-mono px-2 py-0.2 rounded bg-amber-950 text-amber-300 border border-amber-800">
+                                <span className="text-[10px] font-bold font-mono px-2.5 py-0.5 rounded-full bg-[#FFF0B8] text-amber-800 border border-[#FFE58A]">
                                   ⭐ Important
                                 </span>
                               )}
                               {topic.priority === 'moderate' && (
-                                <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-yellow-950 text-yellow-300 border border-yellow-800">
+                                <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#EAE5FF] text-[#7C6EE6] border border-[#D9D2F8]">
                                   🟡 Moderate
                                 </span>
                               )}
                               {topic.priority === 'low' && (
-                                <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-zinc-800 text-zinc-400 border border-zinc-700">
+                                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#FFFDF9] text-[#777589] border border-[#EEEAF4]">
                                   ⚪ Low Priority
                                 </span>
                               )}
                             </div>
 
                             {topic.priorityReason && (
-                              <p className="text-[11px] text-zinc-400 leading-tight">
+                              <p className="text-xs text-[#777589] leading-tight">
                                 {topic.priorityReason}
                               </p>
                             )}
                           </div>
                         </div>
 
-                        {/* Fast Launch Tools */}
-                        <div className="flex items-center gap-1.5 flex-wrap flex-shrink-0 pt-2 md:pt-0">
+                        {/* Fast Launch Tools - Coordinated Pastel Badges */}
+                        <div className="flex items-center gap-1.5 flex-wrap shrink-0 pt-2 md:pt-0">
                           <button
                             onClick={() => {
                               setSelectedTopicId(topic.id);
                               setActiveTab('notes');
                             }}
-                            className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-red-950/40 hover:bg-red-900/40 border border-red-800/40 text-red-300 hover:text-white transition-colors"
+                            className="flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#EAE5FF] hover:bg-[#ded7ff] text-[#7C6EE6] transition-colors"
                             title="Open AI Notes & Explain Differently"
                           >
-                            <FileText className="w-3.5 h-3.5 text-red-400" />
+                            <FileText className="w-3.5 h-3.5" />
                             <span>Notes</span>
                           </button>
 
@@ -310,10 +326,10 @@ export const SubjectDetailView: React.FC = () => {
                               setSelectedTopicId(topic.id);
                               setActiveTab('important-questions');
                             }}
-                            className="flex items-center gap-1 px-2 py-1.5 rounded-lg text-xs font-medium bg-[#141420] hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-white transition-colors"
+                            className="flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#FFF0B8]/70 hover:bg-[#FFF0B8] text-amber-800 transition-colors"
                             title="Important Questions (2M/5M/10M)"
                           >
-                            <HelpCircle className="w-3.5 h-3.5 text-blue-400" />
+                            <HelpCircle className="w-3.5 h-3.5 text-amber-700" />
                             <span className="hidden sm:inline">Questions</span>
                           </button>
 
@@ -322,10 +338,10 @@ export const SubjectDetailView: React.FC = () => {
                               setSelectedTopicId(topic.id);
                               setActiveTab('mcqs');
                             }}
-                            className="flex items-center gap-1 px-2 py-1.5 rounded-lg text-xs font-medium bg-[#141420] hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-white transition-colors"
+                            className="flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#CFF5E7]/70 hover:bg-[#CFF5E7] text-[#319B78] transition-colors"
                             title="MCQs"
                           >
-                            <CheckSquare className="w-3.5 h-3.5 text-emerald-400" />
+                            <CheckSquare className="w-3.5 h-3.5 text-[#319B78]" />
                             <span className="hidden sm:inline">Quiz</span>
                           </button>
 
@@ -334,10 +350,10 @@ export const SubjectDetailView: React.FC = () => {
                               setSelectedTopicId(topic.id);
                               setActiveTab('numericals');
                             }}
-                            className="flex items-center gap-1 px-2 py-1.5 rounded-lg text-xs font-medium bg-[#141420] hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-white transition-colors"
+                            className="flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#FFE0D2]/70 hover:bg-[#FFE0D2] text-[#E5A044] transition-colors"
                             title="Numericals & Step-by-Step Solutions"
                           >
-                            <Binary className="w-3.5 h-3.5 text-purple-400" />
+                            <Binary className="w-3.5 h-3.5 text-[#E5A044]" />
                             <span className="hidden sm:inline">Numericals</span>
                           </button>
 
@@ -346,10 +362,10 @@ export const SubjectDetailView: React.FC = () => {
                               setSelectedTopicId(topic.id);
                               setActiveTab('mindmaps');
                             }}
-                            className="flex items-center gap-1 px-2 py-1.5 rounded-lg text-xs font-medium bg-[#141420] hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-white transition-colors"
+                            className="p-2 rounded-xl text-xs font-semibold bg-[#FFDCE8]/70 hover:bg-[#FFDCE8] text-rose-600 transition-colors"
                             title="Mind Map"
                           >
-                            <GitBranch className="w-3.5 h-3.5 text-amber-400" />
+                            <GitBranch className="w-3.5 h-3.5" />
                           </button>
 
                           <button
@@ -357,10 +373,11 @@ export const SubjectDetailView: React.FC = () => {
                               setSelectedTopicId(topic.id);
                               setActiveTab('ask-ai');
                             }}
-                            className="flex items-center gap-1 px-2 py-1.5 rounded-lg text-xs font-medium bg-[#141420] hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-white transition-colors"
+                            className="btn-pastel-primary px-3 py-1.5 rounded-xl text-xs font-bold text-white shadow-sm flex items-center gap-1"
                             title="Ask AI Tutor"
                           >
-                            <MessageSquare className="w-3.5 h-3.5 text-red-400" />
+                            <MessageSquare className="w-3.5 h-3.5" />
+                            <span className="hidden sm:inline">AI Tutor</span>
                           </button>
                         </div>
                       </div>

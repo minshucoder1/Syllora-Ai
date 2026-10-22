@@ -224,14 +224,14 @@ export const AIToolsCatalogView: React.FC = () => {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-10">
       {/* Header */}
       <div className="text-center space-y-2 max-w-2xl mx-auto">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-950/60 border border-red-800/40 text-red-400 text-xs font-mono font-bold">
-          <Sparkles className="w-3.5 h-3.5 text-red-500" />
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EAE5FF] border border-[#D9D2F8] text-[#7C6EE6] text-xs font-semibold shadow-sm">
+          <Sparkles className="w-3.5 h-3.5 text-[#7C6EE6]" />
           <span>ALL 22 ADVANCED STUDY TOOLS</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-          StudyAI Tools <span className="text-red-500">Catalog</span>
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-[#28263A] tracking-tight">
+          Syllora AI Tools <span className="text-[#7C6EE6]">Catalog</span>
         </h1>
-        <p className="text-xs sm:text-sm text-zinc-400">
+        <p className="text-xs sm:text-sm text-[#777589]">
           Curated intelligence tools organized by learning phase — from syllabus ingestion to exam mastery.
         </p>
       </div>
@@ -240,9 +240,9 @@ export const AIToolsCatalogView: React.FC = () => {
       <div className="space-y-10">
         {toolCategories.map((cat, cIdx) => (
           <div key={cIdx} className="space-y-4">
-            <div className="border-b border-red-950/40 pb-2">
-              <h2 className="text-lg font-bold text-white tracking-tight">{cat.title}</h2>
-              <p className="text-xs text-zinc-400">{cat.description}</p>
+            <div className="border-b border-[#EEEAF4] pb-2.5">
+              <h2 className="text-lg font-bold text-[#28263A] tracking-tight">{cat.title}</h2>
+              <p className="text-xs text-[#777589]">{cat.description}</p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -252,28 +252,28 @@ export const AIToolsCatalogView: React.FC = () => {
                   <div
                     key={tool.id}
                     onClick={() => setActiveTab(tool.id)}
-                    className="p-5 rounded-2xl bg-[#090912] border border-red-950/40 hover:border-red-600/50 card-hover-glow cursor-pointer flex flex-col justify-between space-y-3 group"
+                    className="p-5 rounded-3xl bg-white border border-[#EEEAF4] hover:border-[#D9D2F8] shadow-[0_4px_20px_rgba(40,38,58,0.03)] hover:shadow-[0_8px_30px_rgba(40,38,58,0.08)] cursor-pointer flex flex-col justify-between space-y-3 transition-all duration-200 group"
                   >
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
-                        <div className="w-9 h-9 rounded-xl bg-red-950/60 border border-red-800/40 flex items-center justify-center text-red-400 group-hover:scale-105 transition-transform">
-                          <Icon className="w-4 h-4" />
+                        <div className="w-10 h-10 rounded-2xl bg-[#EAE5FF] border border-[#D9D2F8]/60 flex items-center justify-center text-[#7C6EE6] group-hover:scale-110 transition-transform">
+                          <Icon className="w-5 h-5" />
                         </div>
                         {tool.badge && (
-                          <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-red-950 text-red-400 border border-red-800">
+                          <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-[#FFE0D2] text-[#E5A044] border border-[#FFCBB3]">
                             {tool.badge}
                           </span>
                         )}
                       </div>
-                      <h3 className="text-sm font-bold text-white group-hover:text-red-400 transition-colors">
+                      <h3 className="text-sm font-bold text-[#28263A] group-hover:text-[#7C6EE6] transition-colors">
                         {tool.name}
                       </h3>
-                      <p className="text-xs text-zinc-400 line-clamp-2 leading-relaxed">
+                      <p className="text-xs text-[#777589] line-clamp-2 leading-relaxed">
                         {tool.desc}
                       </p>
                     </div>
 
-                    <div className="flex items-center justify-between text-[11px] font-bold text-red-500 pt-2 border-t border-zinc-900">
+                    <div className="flex items-center justify-between text-xs font-bold text-[#7C6EE6] pt-3 border-t border-[#EEEAF4]">
                       <span>Launch Tool</span>
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </div>

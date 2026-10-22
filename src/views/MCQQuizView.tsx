@@ -6,9 +6,9 @@ import {
   RefreshCw,
   CheckCircle2,
   XCircle,
-  HelpCircle,
   Award,
   ArrowRight,
+  ChevronDown,
 } from 'lucide-react';
 
 export const MCQQuizView: React.FC = () => {
@@ -107,35 +107,38 @@ export const MCQQuizView: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-2xl glass-panel-heavy border border-red-950/40">
+      <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#EEEAF4] shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="space-y-1">
-          <div className="flex items-center gap-2 text-xs font-mono text-red-400">
-            <CheckSquare className="w-4 h-4 text-red-500" />
-            <span>EXAM DRILL ENGINE</span>
+          <div className="flex items-center gap-2 text-xs font-semibold text-[#7C6EE6]">
+            <CheckSquare className="w-4 h-4 text-[#7C6EE6]" />
+            <span>EXAM DRILL ENGINE • MCQ SPRINT</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white">Multiple Choice Quiz</h1>
-          <p className="text-xs text-zinc-400">
-            Topic: <span className="text-white font-bold">{currentTopic?.name || 'Syllabus Topic'}</span>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#28263A]">Practice MCQs</h1>
+          <p className="text-xs sm:text-sm text-[#777589]">
+            Topic: <span className="text-[#28263A] font-bold">{currentTopic?.name || 'Syllabus Topic'}</span>
           </p>
         </div>
 
         <div className="flex items-center gap-2">
-          <select
-            value={currentTopic?.id}
-            onChange={(e) => setSelectedTopicId(e.target.value)}
-            className="bg-[#0f0f18] border border-red-950/60 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 max-w-[200px] truncate"
-          >
-            {allTopics.map((t) => (
-              <option key={t.id} value={t.id}>
-                {t.name}
-              </option>
-            ))}
-          </select>
+          <div className="relative">
+            <select
+              value={currentTopic?.id}
+              onChange={(e) => setSelectedTopicId(e.target.value)}
+              className="bg-[#FFFDF9] border border-[#EEEAF4] rounded-2xl px-3.5 py-2 text-xs text-[#28263A] focus:outline-none focus:border-[#7C6EE6] max-w-[200px] truncate pr-8 font-medium shadow-sm appearance-none"
+            >
+              {allTopics.map((t) => (
+                <option key={t.id} value={t.id}>
+                  {t.name}
+                </option>
+              ))}
+            </select>
+            <ChevronDown className="w-3.5 h-3.5 text-[#777589] absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+          </div>
 
           <button
             onClick={fetchMCQs}
             disabled={loading}
-            className="btn-red-glow p-2 rounded-xl text-white"
+            className="btn-pastel-primary p-2.5 rounded-2xl text-white shadow-sm"
             title="Regenerate MCQs"
           >
             <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
@@ -144,15 +147,15 @@ export const MCQQuizView: React.FC = () => {
       </div>
 
       {loading ? (
-        <div className="glass-panel-heavy rounded-2xl p-12 text-center space-y-4">
-          <RefreshCw className="w-8 h-8 animate-spin text-red-500 mx-auto" />
-          <h3 className="text-base font-bold text-white">Generating University Standard MCQs...</h3>
-          <p className="text-xs text-zinc-400">Formulating questions with distractor explanations.</p>
+        <div className="p-12 rounded-3xl bg-white border border-[#EEEAF4] shadow-sm text-center space-y-4">
+          <RefreshCw className="w-8 h-8 animate-spin text-[#7C6EE6] mx-auto" />
+          <h3 className="text-base font-bold text-[#28263A]">Generating University Standard MCQs...</h3>
+          <p className="text-xs text-[#777589]">Formulating questions with distractor explanations and concept hints.</p>
         </div>
       ) : mcqs.length > 0 && currentQ ? (
         <div className="space-y-6">
           {/* Progress bar */}
-          <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
+          <div className="flex items-center justify-between text-xs font-semibold text-[#777589]">
             <span>
               Question {currentIdx + 1} of {mcqs.length}
             </span>
@@ -160,16 +163,16 @@ export const MCQQuizView: React.FC = () => {
               Answered: {Object.keys(selectedAnswers).length} / {mcqs.length}
             </span>
           </div>
-          <div className="w-full h-1.5 bg-zinc-900 rounded-full overflow-hidden">
+          <div className="w-full h-2 bg-[#F3F0F8] rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-red-600 to-rose-500 rounded-full transition-all duration-300"
+              className="h-full bg-gradient-to-r from-[#7C6EE6] to-[#A99EFA] rounded-full transition-all duration-300"
               style={{ width: `${((currentIdx + 1) / mcqs.length) * 100}%` }}
             />
           </div>
 
           {/* Question Card */}
-          <div className="glass-panel-heavy rounded-2xl p-6 sm:p-8 border border-red-950/40 space-y-6">
-            <h2 className="text-base sm:text-lg font-bold text-white leading-relaxed">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#EEEAF4] shadow-[0_4px_24px_rgba(40,38,58,0.04)] space-y-6">
+            <h2 className="text-base sm:text-lg font-bold text-[#28263A] leading-relaxed">
               {currentIdx + 1}. {currentQ.question}
             </h2>
 
@@ -181,32 +184,32 @@ export const MCQQuizView: React.FC = () => {
                 const isSelected = selectedAnswers[currentIdx] === opt;
                 const isCorrect = currentQ.correctAnswer === opt;
 
-                let optionStyle = 'bg-[#0b0b14] border-zinc-900 text-zinc-200 hover:border-red-950';
+                let optionStyle = 'bg-[#FFFDF9] border-[#EEEAF4] text-[#28263A] hover:border-[#D9D2F8] hover:bg-[#EAE5FF]/20';
                 if (quizSubmitted) {
                   if (isCorrect) {
-                    optionStyle = 'bg-emerald-950/50 border-emerald-600 text-emerald-200 font-bold';
+                    optionStyle = 'bg-[#CFF5E7] border-[#A9E8D2] text-[#319B78] font-bold';
                   } else if (isSelected) {
-                    optionStyle = 'bg-red-950/50 border-red-600 text-red-200';
+                    optionStyle = 'bg-rose-50 border-rose-300 text-rose-700 font-semibold';
                   }
                 } else if (isSelected) {
-                  optionStyle = 'bg-red-950/60 border-red-600 text-white shadow-[0_0_15px_rgba(239,68,68,0.3)] font-bold';
+                  optionStyle = 'bg-[#EAE5FF] border-[#7C6EE6] text-[#7C6EE6] font-bold shadow-sm';
                 }
 
                 return (
                   <button
                     key={opt}
                     onClick={() => handleSelectOption(opt)}
-                    className={`w-full p-4 rounded-xl text-xs sm:text-sm text-left border flex items-center gap-3 transition-all ${optionStyle}`}
+                    className={`w-full p-4 rounded-2xl text-xs sm:text-sm text-left border flex items-center gap-3 transition-all cursor-pointer ${optionStyle}`}
                   >
-                    <span className="w-6 h-6 rounded-lg bg-black/60 flex items-center justify-center font-mono font-bold text-xs flex-shrink-0">
+                    <span className="w-7 h-7 rounded-xl bg-white border border-[#EEEAF4] shadow-sm flex items-center justify-center font-mono font-bold text-xs shrink-0 text-[#28263A]">
                       {opt}
                     </span>
                     <span className="flex-1">{text}</span>
                     {quizSubmitted && isCorrect && (
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                      <CheckCircle2 className="w-5 h-5 text-[#319B78]" />
                     )}
                     {quizSubmitted && isSelected && !isCorrect && (
-                      <XCircle className="w-4 h-4 text-red-400" />
+                      <XCircle className="w-5 h-5 text-rose-500" />
                     )}
                   </button>
                 );
@@ -215,18 +218,18 @@ export const MCQQuizView: React.FC = () => {
 
             {/* Explanation box */}
             {quizSubmitted && (
-              <div className="p-4 rounded-xl bg-black/50 border border-zinc-800 space-y-1 text-xs">
-                <span className="font-bold text-red-400 font-mono">Answer Explanation:</span>
-                <p className="text-zinc-300 leading-relaxed">{currentQ.explanation}</p>
+              <div className="p-4 rounded-2xl bg-[#FFFDF9] border border-[#EEEAF4] space-y-1 text-xs">
+                <span className="font-bold text-[#7C6EE6] font-mono">Answer Explanation:</span>
+                <p className="text-[#777589] leading-relaxed">{currentQ.explanation}</p>
               </div>
             )}
 
             {/* Navigation buttons */}
-            <div className="flex items-center justify-between pt-4 border-t border-zinc-900">
+            <div className="flex items-center justify-between pt-4 border-t border-[#EEEAF4]">
               <button
                 onClick={() => setCurrentIdx((i) => Math.max(0, i - 1))}
                 disabled={currentIdx === 0}
-                className="px-4 py-2 rounded-xl text-xs font-semibold bg-[#12121c] border border-zinc-800 text-zinc-300 disabled:opacity-30"
+                className="px-4 py-2 rounded-2xl text-xs font-semibold bg-[#FFFDF9] border border-[#EEEAF4] text-[#777589] hover:text-[#28263A] disabled:opacity-40 transition-colors"
               >
                 Previous
               </button>
@@ -234,7 +237,7 @@ export const MCQQuizView: React.FC = () => {
               {currentIdx < mcqs.length - 1 ? (
                 <button
                   onClick={() => setCurrentIdx((i) => Math.min(mcqs.length - 1, i + 1))}
-                  className="btn-red-glow px-5 py-2 rounded-xl text-xs font-bold text-white"
+                  className="btn-pastel-primary px-5 py-2.5 rounded-2xl text-xs font-bold text-white shadow-sm"
                 >
                   Next Question →
                 </button>
@@ -242,7 +245,7 @@ export const MCQQuizView: React.FC = () => {
                 !quizSubmitted && (
                   <button
                     onClick={handleSubmitQuiz}
-                    className="btn-red-glow px-6 py-2 rounded-xl text-xs font-bold text-white uppercase tracking-wider"
+                    className="btn-pastel-primary px-6 py-2.5 rounded-2xl text-xs font-bold text-white uppercase tracking-wider shadow-sm"
                   >
                     Submit Quiz
                   </button>
@@ -253,18 +256,18 @@ export const MCQQuizView: React.FC = () => {
 
           {/* Result Card */}
           {quizSubmitted && (
-            <div className="p-6 rounded-2xl bg-gradient-to-r from-red-950/40 via-[#0e0a14] to-black border border-red-800/50 flex flex-col sm:flex-row items-center justify-between gap-4 animate-fade-in">
+            <div className="p-6 rounded-3xl bg-gradient-to-r from-[#CFF5E7]/50 via-white to-[#EAE5FF]/40 border border-[#A9E8D2] flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm animate-fade-in">
               <div className="space-y-1">
-                <span className="text-xs font-mono uppercase text-red-400 font-bold">
-                  Quiz Completed
+                <span className="text-xs font-mono uppercase text-[#319B78] font-bold">
+                  Quiz Completed 🎉
                 </span>
-                <div className="text-2xl font-extrabold text-white">
+                <div className="text-2xl font-extrabold text-[#28263A]">
                   Score: {calculateScore()} / {mcqs.length} ({Math.round((calculateScore() / mcqs.length) * 100)}%)
                 </div>
               </div>
               <button
                 onClick={fetchMCQs}
-                className="btn-red-glow px-5 py-2 rounded-xl text-xs font-bold text-white"
+                className="btn-pastel-primary px-5 py-2.5 rounded-2xl text-xs font-bold text-white shadow-sm"
               >
                 Try Another Set
               </button>
